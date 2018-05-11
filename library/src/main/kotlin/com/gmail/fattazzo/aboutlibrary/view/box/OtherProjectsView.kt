@@ -42,7 +42,7 @@ import com.gmail.fattazzo.aboutlibrary.domain.Project
 class OtherProjectsView(private val mContext: Context, private val projects: List<Project>, private val lang: String) {
 
     private var mInflater: LayoutInflater = LayoutInflater.from(mContext)
-    private var mRootView: View = mInflater.inflate(R.layout.view_other_projects, null)
+    private var mRootView: View = mInflater.inflate(R.layout.aboutlibrary_view_other_projects, null)
 
     fun create(): View {
         val otherProjectsLayout = mRootView.findViewById<LinearLayout>(R.id.otherProjectsLayout)

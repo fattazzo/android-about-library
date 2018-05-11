@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <integer name="app_button_columns">2</integer>
+    <integer name="aboutlibrary_app_button_columns">2</integer>
 </resources>

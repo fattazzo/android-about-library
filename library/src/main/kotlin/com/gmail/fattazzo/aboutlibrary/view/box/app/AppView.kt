@@ -47,7 +47,7 @@ import com.squareup.picasso.Picasso
 class AppView(private val mContext: Context, private val project: Project, private val lang: String, private val additionalAppButton: List<AppButton>) {
 
     private var mInflater: LayoutInflater = LayoutInflater.from(mContext)
-    private var mRootView: View = mInflater.inflate(R.layout.view_app, null)
+    private var mRootView: View = mInflater.inflate(R.layout.aboutlibrary_view_app, null)
 
     fun create(): View {
         val i18n = project.getI18n(lang) ?: project.getI18n()
@@ -70,31 +70,31 @@ class AppView(private val mContext: Context, private val project: Project, priva
         val buttons = mutableListOf<View>()
         project.playStoreUrl?.let {
             buttons.add(AppButton(mContext)
-                    .withText(R.string.play_store)
-                    .withDrawableResId(R.drawable.googleplay)
+                    .withText(R.string.aboutlibrary_play_store)
+                    .withDrawableResId(R.drawable.aboutlibrary_googleplay)
                     .withAction(View.OnClickListener { Utils.openLink(mContext, project.playStoreUrl) })
                     .create())
         }
 
         project.githubUrl?.let {
             buttons.add(AppButton(mContext)
-                    .withText(R.string.github_project)
-                    .withDrawableResId(R.drawable.github)
+                    .withText(R.string.aboutlibrary_github_project)
+                    .withDrawableResId(R.drawable.aboutlibrary_github)
                     .withAction(View.OnClickListener { Utils.openLink(mContext, project.githubUrl) })
                     .create())
         }
 
         project.wikiUrl?.let {
             buttons.add(AppButton(mContext)
-                    .withText(R.string.wiki)
-                    .withDrawableResId(R.drawable.wiki)
+                    .withText(R.string.aboutlibrary_wiki)
+                    .withDrawableResId(R.drawable.aboutlibrary_wiki)
                     .withAction(View.OnClickListener { Utils.openLink(mContext, project.wikiUrl) })
                     .create())
         }
 
         additionalAppButton.forEach { buttons.add(it.create()) }
 
-        val columns = mContext.resources.getInteger(R.integer.app_button_columns)
+        val columns = mContext.resources.getInteger(R.integer.aboutlibrary_app_button_columns)
         val row = buttons.size / columns
         buttonLayout.alignmentMode = GridLayout.ALIGN_BOUNDS
         buttonLayout.columnCount = columns

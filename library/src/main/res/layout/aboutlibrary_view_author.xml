@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?><!--
   ~
   ~ Project: android-about-library
-  ~ File: view_author.xml
+  ~ File: aboutlibrary_view_author.xml
   ~
   ~ Created by fattazzo
   ~ Copyright © 2018 Gianluca Fattarsi. All rights reserved.
@@ -47,8 +47,8 @@
 
             <ImageView
                 android:id="@+id/authorImageView"
-                android:layout_width="@dimen/app_icon_size"
-                android:layout_height="@dimen/app_icon_size"
+                android:layout_width="@dimen/aboutlibrary_app_icon_size"
+                android:layout_height="@dimen/aboutlibrary_app_icon_size"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 project:layout_constraintStart_toStartOf="parent"
@@ -60,7 +60,7 @@
                 android:layout_height="0dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:text="@string/author"
+                android:text="@string/aboutlibrary_author"
                 android:textAllCaps="true"
                 android:textStyle="bold"
                 project:layout_constraintStart_toEndOf="@+id/authorImageView"
@@ -104,9 +104,9 @@
                     android:clickable="true"
                     android:focusable="true"
                     android:visibility="gone"
-                    project:backgroundTint="@color/email"
+                    project:backgroundTint="@color/aboutlibrary_email"
                     project:fabSize="mini"
-                    project:srcCompat="@drawable/email" />
+                    project:srcCompat="@drawable/aboutlibrary_email" />
 
                 <android.support.design.widget.FloatingActionButton
                     android:id="@+id/websiteFAB"
@@ -118,9 +118,9 @@
                     android:clickable="true"
                     android:focusable="true"
                     android:visibility="gone"
-                    project:backgroundTint="@color/website"
+                    project:backgroundTint="@color/aboutlibrary_website"
                     project:fabSize="mini"
-                    project:srcCompat="@drawable/website" />
+                    project:srcCompat="@drawable/aboutlibrary_website" />
 
                 <android.support.design.widget.FloatingActionButton
                     android:id="@+id/githubFAB"
@@ -132,9 +132,9 @@
                     android:clickable="true"
                     android:focusable="true"
                     android:visibility="gone"
-                    project:backgroundTint="@color/github"
+                    project:backgroundTint="@color/aboutlibrary_github"
                     project:fabSize="mini"
-                    project:srcCompat="@drawable/github" />
+                    project:srcCompat="@drawable/aboutlibrary_github" />
 
                 <android.support.design.widget.FloatingActionButton
                     android:id="@+id/facebookFAB"
@@ -146,9 +146,9 @@
                     android:clickable="true"
                     android:focusable="true"
                     android:visibility="gone"
-                    project:backgroundTint="@color/facebook"
+                    project:backgroundTint="@color/aboutlibrary_facebook"
                     project:fabSize="mini"
-                    project:srcCompat="@drawable/facebook" />
+                    project:srcCompat="@drawable/aboutlibrary_facebook" />
 
                 <android.support.design.widget.FloatingActionButton
                     android:id="@+id/twitterFAB"
@@ -160,9 +160,9 @@
                     android:clickable="true"
                     android:focusable="true"
                     android:visibility="gone"
-                    project:backgroundTint="@color/twitter"
+                    project:backgroundTint="@color/aboutlibrary_twitter"
                     project:fabSize="mini"
-                    project:srcCompat="@drawable/twitter" />
+                    project:srcCompat="@drawable/aboutlibrary_twitter" />
 
                 <android.support.design.widget.FloatingActionButton
                     android:id="@+id/googleplusFAB"
@@ -174,9 +174,9 @@
                     android:clickable="true"
                     android:focusable="true"
                     android:visibility="gone"
-                    project:backgroundTint="@color/googleplus"
+                    project:backgroundTint="@color/aboutlibrary_googleplus"
                     project:fabSize="mini"
-                    project:srcCompat="@drawable/gplus" />
+                    project:srcCompat="@drawable/aboutlibrary_gplus" />
 
                 <android.support.design.widget.FloatingActionButton
                     android:id="@+id/linkedinFAB"
@@ -188,9 +188,9 @@
                     android:clickable="true"
                     android:focusable="true"
                     android:visibility="gone"
-                    project:backgroundTint="@color/linkedin"
+                    project:backgroundTint="@color/aboutlibrary_linkedin"
                     project:fabSize="mini"
-                    project:srcCompat="@drawable/linkedin" />
+                    project:srcCompat="@drawable/aboutlibrary_linkedin" />
 
             </LinearLayout>
 

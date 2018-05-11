@@ -47,7 +47,7 @@ import com.squareup.picasso.Picasso
 class ProjectView(private val mContext: Context, private val project: Project, private val lang: String) {
 
     private var mInflater: LayoutInflater = LayoutInflater.from(mContext)
-    private var mRootView: View = mInflater.inflate(R.layout.view_project, null)
+    private var mRootView: View = mInflater.inflate(R.layout.aboutlibrary_view_project, null)
 
     fun create(): View {
         val i18n = project.getI18n(lang) ?: project.getI18n()
@@ -62,7 +62,7 @@ class ProjectView(private val mContext: Context, private val project: Project, p
         val projectsLayout = mRootView.findViewById<GridLayout>(R.id.projectsLayout)
         val linkViews = buildProjectLinks(project)
 
-        val columns = mContext.resources.getInteger(R.integer.app_button_columns)
+        val columns = mContext.resources.getInteger(R.integer.aboutlibrary_app_button_columns)
         val row = linkViews.size / columns
         projectsLayout.alignmentMode = GridLayout.ALIGN_BOUNDS
         projectsLayout.columnCount = columns
@@ -94,16 +94,16 @@ class ProjectView(private val mContext: Context, private val project: Project, p
         val projects = mutableListOf<View>()
 
         project.playStoreUrl?.let {
-            projects.add(buildButton(R.string.play_store, R.color.playstore, R.drawable.googleplay, it))
+            projects.add(buildButton(R.string.aboutlibrary_play_store, R.color.aboutlibrary_playstore, R.drawable.aboutlibrary_googleplay, it))
         }
         project.githubUrl?.let {
-            projects.add(buildButton(R.string.github_project, R.color.black, R.drawable.github, it))
+            projects.add(buildButton(R.string.aboutlibrary_github_project, R.color.aboutlibrary_black, R.drawable.aboutlibrary_github, it))
         }
         project.appleStoreUrl?.let {
-            projects.add(buildButton(R.string.apple_store, R.color.black, R.drawable.apple, it))
+            projects.add(buildButton(R.string.aboutlibrary_apple_store, R.color.aboutlibrary_black, R.drawable.aboutlibrary_apple, it))
         }
         project.websiteUrl?.let {
-            projects.add(buildButton(R.string.website, R.color.website, R.drawable.website, it))
+            projects.add(buildButton(R.string.aboutlibrary_website, R.color.aboutlibrary_website, R.drawable.aboutlibrary_website, it))
         }
 
         return projects
@@ -114,7 +114,7 @@ class ProjectView(private val mContext: Context, private val project: Project, p
         button.text = mContext.getString(textResId)
         button.setCompoundDrawablesWithIntrinsicBounds(mContext.getDrawable(drawableResId), null, null, null)
         button.setTextColor(textColor)
-        button.background = mContext.getDrawable(R.drawable.button_background)
+        button.background = mContext.getDrawable(R.drawable.aboutlibrary_button_background)
         button.setOnClickListener { Utils.openLink(mContext, urlToOpen) }
         return button
     }

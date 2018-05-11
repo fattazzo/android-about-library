@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?><!--
   ~
   ~ Project: android-about-library
-  ~ File: view_app.xml
+  ~ File: aboutlibrary_view_app.xml
   ~
   ~ Created by fattazzo
   ~ Copyright © 2018 Gianluca Fattarsi. All rights reserved.
@@ -40,8 +40,8 @@
 
         <ImageView
             android:id="@+id/appIconView"
-            android:layout_width="@dimen/app_icon_size"
-            android:layout_height="@dimen/app_icon_size"
+            android:layout_width="@dimen/aboutlibrary_app_icon_size"
+            android:layout_height="@dimen/aboutlibrary_app_icon_size"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
@@ -58,7 +58,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="2dp"
             android:textAllCaps="true"
-            android:textAppearance="@style/TextAppearance.Large"
+            android:textAppearance="@style/AndroidLibraryTextAppearance.Large"
             android:textStyle="bold"
             project:layout_constraintEnd_toEndOf="parent"
             project:layout_constraintStart_toStartOf="parent"

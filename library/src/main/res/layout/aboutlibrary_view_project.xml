@@ -2,7 +2,7 @@
 <!--
   ~
   ~ Project: android-about-library
-  ~ File: view_project.xml
+  ~ File: aboutlibrary_view_project.xml
   ~
   ~ Created by fattazzo
   ~ Copyright © 2018 Gianluca Fattarsi. All rights reserved.
@@ -40,13 +40,13 @@
 
         <ImageView
             android:id="@+id/iconImageView"
-            android:layout_width="@dimen/app_icon_size"
-            android:layout_height="@dimen/app_icon_size"
+            android:layout_width="@dimen/aboutlibrary_app_icon_size"
+            android:layout_height="@dimen/aboutlibrary_app_icon_size"
             android:layout_marginStart="8dp"
             android:layout_marginTop="2dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view"
-            app:srcCompat="@drawable/project" />
+            app:srcCompat="@drawable/aboutlibrary_project" />
 
         <TextView
             android:id="@+id/titleTV"
@@ -57,7 +57,7 @@
             android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
             android:textAllCaps="true"
-            android:textAppearance="@style/TextAppearance.Medium"
+            android:textAppearance="@style/AndroidLibraryTextAppearance.Medium"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/iconImageView"
             app:layout_constraintEnd_toEndOf="parent"

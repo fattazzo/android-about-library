@@ -1,11 +1,11 @@
 <resources>
-    <string name="app_name" translatable="false">About Library</string>
+    <string name="aboutlibrary_app_name" translatable="false">About Library</string>
 
-    <string name="play_store">Play store</string>
-    <string name="apple_store">Apple store</string>
-    <string name="website">Website</string>
-    <string name="github_project">Project</string>
-    <string name="wiki">Wiki</string>
-    <string name="author">Author</string>
-    <string name="other_projects">Other projects</string>
+    <string name="aboutlibrary_play_store">Play store</string>
+    <string name="aboutlibrary_apple_store">Apple store</string>
+    <string name="aboutlibrary_website">Website</string>
+    <string name="aboutlibrary_github_project">Project</string>
+    <string name="aboutlibrary_wiki">Wiki</string>
+    <string name="aboutlibrary_author">Author</string>
+    <string name="aboutlibrary_other_projects">Other projects</string>
 </resources>

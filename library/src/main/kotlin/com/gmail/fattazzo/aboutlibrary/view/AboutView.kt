@@ -53,8 +53,8 @@ import java.net.URL
 open class AboutView(private val mContext: Context) {
 
     private var mInflater: LayoutInflater = LayoutInflater.from(mContext)
-    private var mRootView: View = mInflater.inflate(R.layout.view_about, null)
-    private var mErrorView: View = mInflater.inflate(R.layout.view_about_error, null)
+    private var mRootView: View = mInflater.inflate(R.layout.aboutlibrary_view_about, null)
+    private var mErrorView: View = mInflater.inflate(R.layout.aboutlibrary_view_about_error, null)
 
     private var boxLayout: LinearLayout = mRootView.findViewById(R.id.boxLayout)
 

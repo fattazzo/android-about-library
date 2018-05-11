@@ -67,7 +67,7 @@ class AppButton(private val mContext: Context) {
     }
 
     fun withAction(onClickListener: View.OnClickListener): AppButton {
-        this.action = action
+        this.action = onClickListener
         return this
     }
 
@@ -75,10 +75,8 @@ class AppButton(private val mContext: Context) {
         val button = Button(mContext)
         button.text = text
         button.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null)
-        button.background = mContext.getDrawable(R.drawable.button_background_white)
-        action?.let {
-            button.setOnClickListener { it }
-        }
+        button.background = mContext.getDrawable(R.drawable.aboutlibrary_button_background_white)
+        button.setOnClickListener(action)
         return button
     }
 }

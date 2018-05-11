@@ -49,7 +49,7 @@ import com.squareup.picasso.Picasso
 class AuthorView(private val mContext: Context, private val author: Author?) {
 
     private var mInflater: LayoutInflater = LayoutInflater.from(mContext)
-    private var mRootView: View = mInflater.inflate(R.layout.view_author, null)
+    private var mRootView: View = mInflater.inflate(R.layout.aboutlibrary_view_author, null)
 
     fun create(): View {
         val authorNameTV = mRootView.findViewById<TextView>(R.id.authorNameTV)

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="play_store">Play store</string>
-    <string name="apple_store">Apple store</string>
-    <string name="website">Sito web</string>
-    <string name="github_project">Progetto</string>
-    <string name="wiki">Guida</string>
-    <string name="author">Autore</string>
-    <string name="other_projects">Altri progetti</string>
+    <string name="aboutlibrary_play_store">Play store</string>
+    <string name="aboutlibrary_apple_store">Apple store</string>
+    <string name="aboutlibrary_website">Sito web</string>
+    <string name="aboutlibrary_github_project">Progetto</string>
+    <string name="aboutlibrary_wiki">Guida</string>
+    <string name="aboutlibrary_author">Autore</string>
+    <string name="aboutlibrary_other_projects">Altri progetti</string>
 </resources>
