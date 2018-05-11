@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="Copyright scope" pattern="src[*]:com.gmail.fattazzo..*&amp;&amp;!src[*]:com.gmail.fattazzo.*.BuildConfig&amp;&amp;!src[*]:com.gmail.fattazzo.*.R" />
+</component>

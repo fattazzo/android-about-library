@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Android About Library</string>
+
+    <string name="app_box">App box</string>
+    <string name="author_box">Author box</string>
+    <string name="other_projects_box">Other projects box</string>
+
+    <string name="show">Show</string>
+    <string name="reset">Reset</string>
+
+    <string name="language">Language</string>
+
+    <string name="app_of_about">App</string>
+</resources>

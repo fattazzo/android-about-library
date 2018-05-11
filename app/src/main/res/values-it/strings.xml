@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Android About Library</string>
+
+    <string name="app_box">Box applicaizone</string>
+    <string name="author_box">Box autore</string>
+    <string name="other_projects_box">Box altri progetti</string>
+
+    <string name="show">Visualizza</string>
+    <string name="reset">Reset</string>
+
+    <string name="language">Lingua</string>
+
+    <string name="app_of_about">App</string>
+</resources>

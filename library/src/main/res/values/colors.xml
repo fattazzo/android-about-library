@@ -1,0 +1,17 @@
+<resources>
+
+    <color name="black_overlay">#66000000</color>
+
+    <color name="background">#d3f2f0f0</color>
+
+    <color name="email">#75b448</color>
+    <color name="website">#ed7d14</color>
+    <color name="github">#efebea</color>
+    <color name="facebook">#3B5998</color>
+    <color name="twitter">#1DA1F2</color>
+    <color name="googleplus">#dd4b39</color>
+    <color name="linkedin">#0077B5</color>
+    <color name="playstore">#607D8B</color>
+
+    <color name="black">#000000</color>
+</resources>

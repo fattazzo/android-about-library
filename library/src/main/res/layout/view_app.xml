@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~
+  ~ Project: android-about-library
+  ~ File: view_app.xml
+  ~
+  ~ Created by fattazzo
+  ~ Copyright © 2018 Gianluca Fattarsi. All rights reserved.
+  ~
+  ~ MIT License
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
+  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in all
+  ~ copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  ~ SOFTWARE.
+  ~
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:project="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@null"
+    android:orientation="vertical">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/appIconView"
+            android:layout_width="@dimen/app_icon_size"
+            android:layout_height="@dimen/app_icon_size"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            project:layout_constraintEnd_toEndOf="parent"
+            project:layout_constraintStart_toStartOf="parent"
+            project:layout_constraintTop_toTopOf="parent"
+            project:srcCompat="@android:drawable/btn_star_big_on" />
+
+        <TextView
+            android:id="@+id/appTitleTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="2dp"
+            android:textAllCaps="true"
+            android:textAppearance="@style/TextAppearance.Large"
+            android:textStyle="bold"
+            project:layout_constraintEnd_toEndOf="parent"
+            project:layout_constraintStart_toStartOf="parent"
+            project:layout_constraintTop_toBottomOf="@+id/appIconView" />
+
+        <android.support.v7.widget.GridLayout
+            android:id="@+id/buttonLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
+            project:layout_constraintEnd_toEndOf="parent"
+            project:layout_constraintStart_toStartOf="parent"
+            project:layout_constraintTop_toBottomOf="@+id/appTitleTV">
+
+        </android.support.v7.widget.GridLayout>
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="2dp"
+            android:background="@android:color/darker_gray"
+            project:layout_constraintBottom_toBottomOf="parent"
+            project:layout_constraintEnd_toEndOf="parent"
+            project:layout_constraintStart_toStartOf="parent"
+            project:layout_constraintTop_toBottomOf="@+id/buttonLayout" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</LinearLayout>
