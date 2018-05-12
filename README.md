@@ -71,7 +71,7 @@ class AboutActivity : Activity() {
 ```
 
 **Explanation**
-* **withInfoUrl**: Url of info configuration. The configuration can be provided as url, jsonString or as a simple object in the app. See the wiki to learn more.
+* **withInfoUrl**: Url of info configuration. The configuration can be provided as url, jsonString or as a simple object in the app. [See the wiki](https://github.com/fattazzo/android-about-library/wiki/Data-source-configuration) to learn more.
 * **withAppId**: App id used for display informations in the "About this app section"
 * **withLang**: Language of about view
 * **withAppBox**: Toggle "About this app section"
