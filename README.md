@@ -25,7 +25,7 @@ All the information can be displayed with multilanguage support!
 
 ## Screenshots from sample app
 
-![image](https://github.com/fattazzo/android-about-library/wiki/images/screenshot01.png){:height="500px" width="200px"}
+![image](https://github.com/fattazzo/android-about-library/wiki/images/screenshot01.png) <!-- .element height="50%" width="50%" -->
 
 
 ## Include in your project
