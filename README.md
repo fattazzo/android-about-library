@@ -25,10 +25,10 @@ All the information can be displayed with multilanguage support!
 
 ## Screenshots from sample app
 
-<a href="https://github.com/fattazzo/android-about-library/wiki/fattazzo/android-about-library/images/screenshot01.png" target="_blank">
-<img align="left" src="https://github.com/fattazzo/android-about-library/wiki/fattazzo/android-about-library/images/screenshot01.png" width=400>
-</a><a href="https://github.com/fattazzo/android-about-library/wiki/fattazzo/android-about-library/images/screenshot01.png" target="_blank">
-<img align="left" src="https://github.com/fattazzo/android-about-library/wiki/fattazzo/android-about-library/images/screenshot01.png" width=400 >
+<a href="https://github.com/fattazzo/android-about-library/wiki/images/screenshot01.png" target="_blank">
+<img align="left" src="https://github.com/fattazzo/android-about-library/wiki/images/screenshot01.png" width=400>
+</a><a href="https://github.com/fattazzo/android-about-library/wiki/images/screenshot01.png" target="_blank">
+<img align="left" src="https://github.com/fattazzo/android-about-library/wiki/images/screenshot01.png" width=400 >
 </a>
 
 
