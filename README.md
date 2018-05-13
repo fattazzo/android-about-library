@@ -2,7 +2,12 @@
 
 The AboutLibraries library allows you to easily generate beautiful about view fully customizable with less effort and code.
 
-## Little overview
+* [Overview](#overview)
+* [Include in your project](#include-in-your-project)
+* [Simple usage](#simple-usage)
+* [Screenshots from sample app](#screenshots-from-sample-app)
+
+## Overview
 
 Here's a quick overview of functions it include:
 
@@ -22,14 +27,6 @@ Here's a quick overview of functions it include:
   - Store and project source button
 
 All the information can be displayed with multilanguage support!
-
-## Screenshots from sample app
-
-<a href="https://github.com/fattazzo/android-about-library/wiki/images/screenshot01.png" target="_blank">
-<img align="left" src="https://github.com/fattazzo/android-about-library/wiki/images/screenshot01.png" width=400>
-</a><a href="https://github.com/fattazzo/android-about-library/wiki/images/screenshot01.png" target="_blank">
-<img align="left" src="https://github.com/fattazzo/android-about-library/wiki/images/screenshot01.png" width=400 >
-</a>
 
 
 ## Include in your project
@@ -84,3 +81,9 @@ class AboutActivity : Activity() {
 * **withOtherProjectsBox**: Toggle "Other projects section"
 
 For advanced configuration please refer to the wiki.
+
+## Screenshots from sample app
+
+![image](https://github.com/fattazzo/android-about-library/wiki/images/screenshot01.png)
+
+![image](https://github.com/fattazzo/android-about-library/wiki/images/screenshot02.png)
