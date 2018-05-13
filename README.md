@@ -23,9 +23,10 @@ Here's a quick overview of functions it include:
 
 All the information can be displayed with multilanguage support!
 
-## Screenshots
+## Screenshots from sample app
 
-Available soon..
+![image](https://github.com/fattazzo/android-about-library/wiki/images/screenshot01.png){:height="500px" width="200px"}
+
 
 ## Include in your project
 
