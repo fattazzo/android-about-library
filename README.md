@@ -14,7 +14,7 @@ Here's a quick overview of functions it include:
 * About this app section
   - Icon
   - Title
-  - Legacy buttons ( like Google Play, GitHub, Apple Store, Website, etc... )
+  - Default buttons ( like Google Play, GitHub, Apple Store, Website, etc... )
   - Custom buttons ( user difined buttons like Error Reporter, Licence, etc... )
 * Author section
   - Profile image using Gravatar
