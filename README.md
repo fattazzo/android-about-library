@@ -92,8 +92,10 @@ Standard screen
 
 ![](https://github.com/fattazzo/android-about-library/wiki/images/screenshot03.png)
 
-Landscape standard and tablet screen
-
-![](https://github.com/fattazzo/android-about-library/wiki/images/screenshot04.png)
+Landscape standard screen
 
 ![](https://github.com/fattazzo/android-about-library/wiki/images/screenshot05.png)
+
+Landscape tablet screen
+
+![](https://github.com/fattazzo/android-about-library/wiki/images/screenshot04.png)
