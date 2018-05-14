@@ -51,6 +51,7 @@ implementation "com.android.support:gridlayout-v7:${versions.supportLib}"
 implementation "com.android.support:design:${versions.supportLib}"
 implementation "com.android.support:cardview-v7:${versions.supportLib}"
 ```
+Verify the latest release at https://github.com/fattazzo/android-about-library/releases/latest
 
 ## Simple usage
 
