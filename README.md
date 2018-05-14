@@ -84,8 +84,16 @@ For advanced configuration please refer to the wiki.
 
 ## Screenshots from sample app
 
-![image](https://github.com/fattazzo/android-about-library/wiki/images/screenshot01.png)
+Standard screen
 
-![image](https://github.com/fattazzo/android-about-library/wiki/images/screenshot02.png)
+![](https://github.com/fattazzo/android-about-library/wiki/images/screenshot01.png)
 
-![image](https://github.com/fattazzo/android-about-library/wiki/images/screenshot03.png)
+![](https://github.com/fattazzo/android-about-library/wiki/images/screenshot02.png)
+
+![](https://github.com/fattazzo/android-about-library/wiki/images/screenshot03.png)
+
+Landscape standard and tablet screen
+
+![](https://github.com/fattazzo/android-about-library/wiki/images/screenshot04.png)
+
+![](https://github.com/fattazzo/android-about-library/wiki/images/screenshot05.png)
