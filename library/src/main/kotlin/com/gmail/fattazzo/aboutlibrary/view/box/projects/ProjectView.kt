@@ -114,8 +114,8 @@ class ProjectView(private val mContext: Context, private val project: Project, p
         return AboutUrlButton(mContext, urlToOpen)
                 .withText(textResId)
                 .withTextColor(textColor)
-                .withDrawableResId(drawableResId)
-                .withBackGroundDark()
+                .withDrawable(drawableResId)
+                .withBackgroundDark()
                 .create()
     }
 }

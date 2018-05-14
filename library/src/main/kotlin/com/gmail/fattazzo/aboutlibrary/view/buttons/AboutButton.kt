@@ -64,7 +64,7 @@ abstract class AboutButton(protected val mContext: Context) {
         return this
     }
 
-    fun withDrawableResId(drawableResId: Int): AboutButton {
+    fun withDrawable(drawableResId: Int): AboutButton {
         this.drawable = mContext.getDrawable(drawableResId)
         return this
     }
@@ -74,7 +74,7 @@ abstract class AboutButton(protected val mContext: Context) {
         return this
     }
 
-    fun withBackGroundDark(darkBG: Boolean = true): AboutButton {
+    fun withBackgroundDark(darkBG: Boolean = true): AboutButton {
         this.backgroundDark = darkBG
         return this
     }

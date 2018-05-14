@@ -72,28 +72,28 @@ class AppView(private val mContext: Context, private val project: Project, priva
         project.playStoreUrl?.let {
             buttons.add(AboutUrlButton(mContext, it)
                     .withText(R.string.aboutlibrary_play_store)
-                    .withDrawableResId(R.drawable.aboutlibrary_googleplay)
+                    .withDrawable(R.drawable.aboutlibrary_googleplay)
                     .create())
         }
 
         project.githubUrl?.let {
             buttons.add(AboutUrlButton(mContext, it)
                     .withText(R.string.aboutlibrary_github_project)
-                    .withDrawableResId(R.drawable.aboutlibrary_github)
+                    .withDrawable(R.drawable.aboutlibrary_github)
                     .create())
         }
 
         project.websiteUrl?.let {
             buttons.add(AboutUrlButton(mContext, it)
                     .withText(R.string.aboutlibrary_website)
-                    .withDrawableResId(R.drawable.aboutlibrary_website)
+                    .withDrawable(R.drawable.aboutlibrary_website)
                     .create())
         }
 
         project.wikiUrl?.let {
             buttons.add(AboutUrlButton(mContext, it)
                     .withText(R.string.aboutlibrary_wiki)
-                    .withDrawableResId(R.drawable.aboutlibrary_wiki)
+                    .withDrawable(R.drawable.aboutlibrary_wiki)
                     .create())
         }
 
