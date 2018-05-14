@@ -87,3 +87,5 @@ For advanced configuration please refer to the wiki.
 ![image](https://github.com/fattazzo/android-about-library/wiki/images/screenshot01.png)
 
 ![image](https://github.com/fattazzo/android-about-library/wiki/images/screenshot02.png)
+
+![image](https://github.com/fattazzo/android-about-library/wiki/images/screenshot03.png)

@@ -71,7 +71,7 @@
         android:layout_below="@id/textView2"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="8dp"
         android:gravity="center_horizontal"
         android:text="@string/aboutlibrary_oops_text"
         android:textAppearance="@style/AndroidLibraryTextAppearance.Medium"

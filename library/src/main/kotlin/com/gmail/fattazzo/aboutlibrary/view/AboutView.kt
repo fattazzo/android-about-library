@@ -77,7 +77,7 @@ open class AboutView(private val mContext: Context) {
         return this
     }
 
-    fun withAdditionalProjectButtons(appId : String, buttons: List<AboutButton>): AboutView {
+    fun withAdditionalProjectButtons(appId: String, buttons: List<AboutButton>): AboutView {
         this.additionalProjectButtons[appId] = buttons
         return this
     }
@@ -167,11 +167,15 @@ open class AboutView(private val mContext: Context) {
      *
      */
     fun create(): View {
-        return when {
-            info != null -> create(info!!)
-            !infoJsonSring.isNullOrBlank() -> create(infoJsonSring!!)
-            !infoUrl.isNullOrBlank() -> create(URL(infoUrl))
-            else -> mErrorView
+        return try {
+            return when {
+                info != null -> create(info!!)
+                !infoJsonSring.isNullOrBlank() -> create(infoJsonSring!!)
+                !infoUrl.isNullOrBlank() -> create(URL(infoUrl))
+                else -> mErrorView
+            }
+        } catch (e: Exception) {
+            mErrorView
         }
     }
 

@@ -8,4 +8,7 @@
     <string name="aboutlibrary_wiki">Wiki</string>
     <string name="aboutlibrary_author">Author</string>
     <string name="aboutlibrary_other_projects">Other projects</string>
+
+    <string name="aboutlibrary_oops">Oops!</string>
+    <string name="aboutlibrary_oops_text">Something went wrong. Please try again later</string>
 </resources>

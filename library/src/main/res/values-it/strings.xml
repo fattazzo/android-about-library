@@ -7,4 +7,7 @@
     <string name="aboutlibrary_wiki">Guida</string>
     <string name="aboutlibrary_author">Autore</string>
     <string name="aboutlibrary_other_projects">Altri progetti</string>
+
+    <string name="aboutlibrary_oops">Oops!</string>
+    <string name="aboutlibrary_oops_text">Sembra che ci sia un problema, per favore riprova più tardi</string>
 </resources>

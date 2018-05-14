@@ -16,4 +16,8 @@
         <item name="android:textSize">@dimen/aboutlibrary_font_size_small</item>
     </style>
 
+    <style name="AndroidLibraryTextAppearance.Big" parent="@android:style/TextAppearance.Large">
+        <item name="android:textSize">@dimen/aboutlibrary_font_size_big</item>
+    </style>
+
 </resources>

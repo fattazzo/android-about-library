@@ -3,6 +3,7 @@
     <dimen name="aboutlibrary_font_size_small">16sp</dimen>
     <dimen name="aboutlibrary_font_size_medium">20sp</dimen>
     <dimen name="aboutlibrary_font_size_large">30sp</dimen>
+    <dimen name="aboutlibrary_font_size_big">60sp</dimen>
 
     <dimen name="aboutlibrary_app_icon_size">96dp</dimen>
 </resources>
