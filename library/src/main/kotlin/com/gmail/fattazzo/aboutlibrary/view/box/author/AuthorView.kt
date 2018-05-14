@@ -25,7 +25,7 @@
  * SOFTWARE.
  */
 
-package com.gmail.fattazzo.aboutlibrary.view.box
+package com.gmail.fattazzo.aboutlibrary.view.box.author
 
 import android.content.Context
 import android.content.Intent

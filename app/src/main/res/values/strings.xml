@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Android About Library</string>
+    <string name="app_name">Android About Library Sample</string>
 
     <string name="app_box">App box</string>
     <string name="author_box">Author box</string>

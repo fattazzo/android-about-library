@@ -1,6 +1,6 @@
 /*
  * Project: android-about-library
- * File: AppButton.kt
+ * File: OtherProjectsView.kt
  *
  * Created by fattazzo
  * Copyright © 2018 Gianluca Fattarsi. All rights reserved.
@@ -25,58 +25,36 @@
  * SOFTWARE.
  */
 
-package com.gmail.fattazzo.aboutlibrary.view.box.app
+package com.gmail.fattazzo.aboutlibrary.view.box.projects
 
 import android.content.Context
-import android.graphics.drawable.Drawable
+import android.view.LayoutInflater
 import android.view.View
-import android.widget.Button
+import android.widget.LinearLayout
 import com.gmail.fattazzo.aboutlibrary.R
+import com.gmail.fattazzo.aboutlibrary.domain.Project
+import com.gmail.fattazzo.aboutlibrary.view.buttons.AboutButton
 
 /**
  * @author fattazzo
  *         <p/>
  *         date: 11/05/18
  */
-class AppButton(private val mContext: Context) {
+class OtherProjectsView(private val mContext: Context, private val projects: List<Project>, private val lang: String, private val additionalProjectButtons: Map<String, List<AboutButton>>) {
 
-    private var text: String = ""
-
-    private var drawable: Drawable? = null
-
-    private var action: View.OnClickListener? = null
-
-    fun withText(textResId: Int): AppButton {
-        this.text = mContext.getString(textResId)
-        return this
-    }
-
-    fun withText(text: String): AppButton {
-        this.text = text
-        return this
-    }
-
-    fun withDrawableResId(drawableResId: Int): AppButton {
-        this.drawable = mContext.getDrawable(drawableResId)
-        return this
-    }
-
-    fun withDrawable(drawable: Drawable): AppButton {
-        this.drawable = drawable
-        return this
-    }
-
-    fun withAction(onClickListener: View.OnClickListener): AppButton {
-        this.action = onClickListener
-        return this
-    }
+    private var mInflater: LayoutInflater = LayoutInflater.from(mContext)
+    private var mRootView: View = mInflater.inflate(R.layout.aboutlibrary_view_other_projects, null)
 
     fun create(): View {
-        val button = Button(mContext)
-        button.text = text
-        button.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null)
-        button.background = mContext.getDrawable(R.drawable.aboutlibrary_button_background_white)
-        button.setOnClickListener(action)
-        return button
+        val otherProjectsLayout = mRootView.findViewById<LinearLayout>(R.id.otherProjectsLayout)
+
+        projects.forEach {
+            val additionalButtons = additionalProjectButtons[it.id].orEmpty()
+
+            val projectView = ProjectView(mContext, it, lang, additionalButtons).create()
+            otherProjectsLayout.addView(projectView)
+        }
+
+        return mRootView
     }
 }

@@ -13,12 +13,14 @@
     </string-array>
 
     <string-array name="projects_list_description">
+        <item>Android About Library</item>
         <item>Total GP World</item>
         <item>Weather of Trentino</item>
         <item>Unknown (No app box show)</item>
     </string-array>
 
     <string-array name="projects_list_id">
+        <item>com.gmail.fattazzo.aboutlibrary</item>
         <item>com.gmail.fattazzo.formula1world</item>
         <item>com.gmail.fattazzo.meteo</item>
         <item>Unknown</item>

@@ -35,7 +35,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.gmail.fattazzo.aboutlibrary.R
 import com.gmail.fattazzo.aboutlibrary.domain.Project
-import com.gmail.fattazzo.aboutlibrary.utils.Utils
+import com.gmail.fattazzo.aboutlibrary.view.buttons.AboutButton
+import com.gmail.fattazzo.aboutlibrary.view.buttons.AboutUrlButton
 import com.squareup.picasso.Picasso
 
 
@@ -44,7 +45,7 @@ import com.squareup.picasso.Picasso
  *         <p/>
  *         date: 10/05/18
  */
-class AppView(private val mContext: Context, private val project: Project, private val lang: String, private val additionalAppButton: List<AppButton>) {
+class AppView(private val mContext: Context, private val project: Project, private val lang: String, private val additionalAppButtons: List<AboutButton>) {
 
     private var mInflater: LayoutInflater = LayoutInflater.from(mContext)
     private var mRootView: View = mInflater.inflate(R.layout.aboutlibrary_view_app, null)
@@ -69,30 +70,34 @@ class AppView(private val mContext: Context, private val project: Project, priva
 
         val buttons = mutableListOf<View>()
         project.playStoreUrl?.let {
-            buttons.add(AppButton(mContext)
+            buttons.add(AboutUrlButton(mContext, it)
                     .withText(R.string.aboutlibrary_play_store)
                     .withDrawableResId(R.drawable.aboutlibrary_googleplay)
-                    .withAction(View.OnClickListener { Utils.openLink(mContext, project.playStoreUrl) })
                     .create())
         }
 
         project.githubUrl?.let {
-            buttons.add(AppButton(mContext)
+            buttons.add(AboutUrlButton(mContext, it)
                     .withText(R.string.aboutlibrary_github_project)
                     .withDrawableResId(R.drawable.aboutlibrary_github)
-                    .withAction(View.OnClickListener { Utils.openLink(mContext, project.githubUrl) })
+                    .create())
+        }
+
+        project.websiteUrl?.let {
+            buttons.add(AboutUrlButton(mContext, it)
+                    .withText(R.string.aboutlibrary_website)
+                    .withDrawableResId(R.drawable.aboutlibrary_website)
                     .create())
         }
 
         project.wikiUrl?.let {
-            buttons.add(AppButton(mContext)
+            buttons.add(AboutUrlButton(mContext, it)
                     .withText(R.string.aboutlibrary_wiki)
                     .withDrawableResId(R.drawable.aboutlibrary_wiki)
-                    .withAction(View.OnClickListener { Utils.openLink(mContext, project.wikiUrl) })
                     .create())
         }
 
-        additionalAppButton.forEach { buttons.add(it.create()) }
+        additionalAppButtons.forEach { buttons.add(it.create()) }
 
         val columns = mContext.resources.getInteger(R.integer.aboutlibrary_app_button_columns)
         val row = buttons.size / columns

@@ -1,6 +1,6 @@
 /*
  * Project: android-about-library
- * File: OtherProjectsView.kt
+ * File: AboutActionButton.kt
  *
  * Created by fattazzo
  * Copyright © 2018 Gianluca Fattarsi. All rights reserved.
@@ -25,33 +25,19 @@
  * SOFTWARE.
  */
 
-package com.gmail.fattazzo.aboutlibrary.view.box
+package com.gmail.fattazzo.aboutlibrary.view.buttons
 
 import android.content.Context
-import android.view.LayoutInflater
 import android.view.View
-import android.widget.LinearLayout
-import com.gmail.fattazzo.aboutlibrary.R
-import com.gmail.fattazzo.aboutlibrary.domain.Project
 
 /**
  * @author fattazzo
  *         <p/>
  *         date: 11/05/18
  */
-class OtherProjectsView(private val mContext: Context, private val projects: List<Project>, private val lang: String) {
+open class AboutActionButton(mContext: Context, protected var action: View.OnClickListener? = null) : AboutButton(mContext) {
 
-    private var mInflater: LayoutInflater = LayoutInflater.from(mContext)
-    private var mRootView: View = mInflater.inflate(R.layout.aboutlibrary_view_other_projects, null)
-
-    fun create(): View {
-        val otherProjectsLayout = mRootView.findViewById<LinearLayout>(R.id.otherProjectsLayout)
-
-        projects.forEach {
-            val projectView = ProjectView(mContext, it, lang).create()
-            otherProjectsLayout.addView(projectView)
-        }
-
-        return mRootView
+    override fun configure(view: View) {
+        view.setOnClickListener(action)
     }
 }

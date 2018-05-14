@@ -38,10 +38,10 @@ import com.gmail.fattazzo.aboutlibrary.domain.Info
 import com.gmail.fattazzo.aboutlibrary.loader.Closure
 import com.gmail.fattazzo.aboutlibrary.loader.InfoBuilder
 import com.gmail.fattazzo.aboutlibrary.loader.InfoDownloaderTask
-import com.gmail.fattazzo.aboutlibrary.view.box.AuthorView
-import com.gmail.fattazzo.aboutlibrary.view.box.OtherProjectsView
-import com.gmail.fattazzo.aboutlibrary.view.box.app.AppButton
 import com.gmail.fattazzo.aboutlibrary.view.box.app.AppView
+import com.gmail.fattazzo.aboutlibrary.view.box.author.AuthorView
+import com.gmail.fattazzo.aboutlibrary.view.box.projects.OtherProjectsView
+import com.gmail.fattazzo.aboutlibrary.view.buttons.AboutButton
 import java.net.URL
 
 
@@ -69,10 +69,16 @@ open class AboutView(private val mContext: Context) {
     private var lang: String = "default"
     private var idApp: String = ""
 
-    private var additionalAppButton = listOf<AppButton>()
+    private var additionalAppButtons = listOf<AboutButton>()
+    private var additionalProjectButtons = mutableMapOf<String, List<AboutButton>>()
 
-    fun withAdditionalAppButton(buttons: List<AppButton>): AboutView {
-        this.additionalAppButton = buttons
+    fun withAdditionalAppButtons(buttons: List<AboutButton>): AboutView {
+        this.additionalAppButtons = buttons
+        return this
+    }
+
+    fun withAdditionalProjectButtons(appId : String, buttons: List<AboutButton>): AboutView {
+        this.additionalProjectButtons[appId] = buttons
         return this
     }
 
@@ -183,7 +189,7 @@ open class AboutView(private val mContext: Context) {
     private fun buildAppBox() {
         val app = info?.getProjectById(idApp)
         if (appBox && app != null) {
-            val appBoxView = AppView(mContext, app, lang, additionalAppButton).create()
+            val appBoxView = AppView(mContext, app, lang, additionalAppButtons).create()
             boxLayout.addView(appBoxView)
         }
     }
@@ -197,7 +203,7 @@ open class AboutView(private val mContext: Context) {
 
     private fun buildOtherProjectsBox() {
         if (otherProjectsBox) {
-            val otherProjectsBoxView = OtherProjectsView(mContext, info?.projects.orEmpty(), lang).create()
+            val otherProjectsBoxView = OtherProjectsView(mContext, info?.projects.orEmpty(), lang, additionalProjectButtons.toMap()).create()
             boxLayout.addView(otherProjectsBoxView)
         }
     }
