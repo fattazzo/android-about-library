@@ -41,11 +41,11 @@ class Info : Serializable {
 
     @SerializedName("author")
     @Expose
-    lateinit var author: Author
+    var author: Author? = null
 
     @SerializedName("projects")
     @Expose
-    lateinit var projects: List<Project>
+    var projects: List<Project> = listOf()
 
     fun getProjectById(id: String): Project? {
         projects.forEach {

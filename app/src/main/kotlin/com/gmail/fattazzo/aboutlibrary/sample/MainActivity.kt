@@ -30,6 +30,10 @@ package com.gmail.fattazzo.aboutlibrary.sample
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.*
+import com.gmail.fattazzo.aboutlibrary.domain.Author
+import com.gmail.fattazzo.aboutlibrary.domain.I18n
+import com.gmail.fattazzo.aboutlibrary.domain.Info
+import com.gmail.fattazzo.aboutlibrary.domain.Project
 import com.gmail.fattazzo.aboutlibrary.view.AboutView
 import org.androidannotations.annotations.AfterViews
 import org.androidannotations.annotations.Click
@@ -89,7 +93,8 @@ open class MainActivity : AppCompatActivity() {
         aboutLayout.removeAllViews()
 
         val aboutView = AboutView(this)
-                .withInfoUrl("https://gist.githubusercontent.com/fattazzo/d6aa41128c39b4882c0b6bd232984cfb/raw")
+                //.withInfoUrl("https://gist.githubusercontent.com/fattazzo/d6aa41128c39b4882c0b6bd232984cfb/raw")
+                .withInfo(createInfoSample())
                 .withAppId(projectsIdArrayRes[appSpinner.selectedItemPosition])
                 .withLang(langCodeArrayRes[langSpinner.selectedItemPosition])
                 .withAppBox(appCheckBox.isChecked)
@@ -110,5 +115,71 @@ open class MainActivity : AppCompatActivity() {
         authorCheckBox.isChecked = true
         otherProjectsCheckBox.isChecked = true
         langSpinner.setSelection(0)
+    }
+
+    private fun createInfoSample(): Info {
+        val author = Author().apply {
+            name = "Gianluca Fattarsi"
+            email = "fattazzo82@gmail.com"
+            github = "https://github.com/fattazzo"
+            facebook = "https://www.facebook.com/Fattazzo"
+            googleplus = "https://plus.google.com/+GianlucaFattarsi"
+            linkedin = "https://www.linkedin.com/in/gianluca-fattarsi"
+        }
+
+        val meteoProject = Project().apply {
+            id = "com.gmail.fattazzo.meteo"
+            icon = "https://lh5.ggpht.com/a9f5u65dd-GgFGbLaDO5XauCNcjtJqOkSDqR_xDJ9vbT4MqutzLz0dfsWBtGBH2Ij6sq=h150"
+            playStoreUrl = "https://play.google.com/store/apps/details?id=com.gmail.fattazzo.meteo"
+            githubUrl = "https://github.com/fattazzo/meteo"
+            i18n = listOf(I18n().apply {
+                lang = "default"
+                title = "Weather of Trentino"
+                description = "Weather information obtained through Forecasts and Planning Office of the Autonomous Province of Trento from site: http://dati.trentino.it provided by www.meteotrentino.it"
+            }, I18n().apply {
+                lang = "it"
+                title = "Meteo del Trentino"
+                description = "Informazioni meteo ottenute tramite l'Ufficio Previsioni e Pianificazione della Provincia Autonoma di Trento dal sito: http://dati.trentino.it forniti da www.meteotrentino.it"
+            })
+        }
+
+        val totalGPProject = Project().apply {
+            id = "com.gmail.fattazzo.formula1world"
+            icon = "https://raw.githubusercontent.com/wiki/fattazzo/total-gp-world/images/logo.png"
+            playStoreUrl = "https://play.google.com/store/apps/details?id=com.gmail.fattazzo.formula1world"
+            githubUrl = "https://github.com/fattazzo/total-gp-world"
+            wikiUrl = "https://github.com/fattazzo/total-gp-world/wiki"
+            i18n = listOf(I18n().apply {
+                lang = "default"
+                title = "Total GP world"
+                description = "With Total GP world you will have all the informations about formula 1 you need: results, rankings, updated timetables and comparisons from the season 1950 to the present.\\nThe app is still in the beginning, so updates will follow, and will add more and more content from time to time."
+            }, I18n().apply {
+                lang = "it"
+                title = "Total GP world"
+                description = "Con Total GP world potrai avere tutte le informazioni sul mondo della formula 1 che ti servono: risultati, classifiche, calendario aggiornato e comparazioni dalla stagione 1950 fino ad oggi."
+            })
+        }
+
+        val aboutLibraryProject = Project().apply {
+            id = "com.gmail.fattazzo.aboutlibrary"
+            icon = "https://raw.githubusercontent.com/wiki/fattazzo/android-about-library/images/info.png"
+            githubUrl = "https://github.com/fattazzo/android-about-library"
+            wikiUrl = "https://github.com/fattazzo/android-about-library/wiki"
+            websiteUrl = "https://fattazzo.github.io/android-about-library/"
+            i18n = listOf(I18n().apply {
+                lang = "default"
+                title = "Android About Library"
+                description = "The AboutLibraries library allows you to easily generate beautiful about view fully customizable with less effort and code."
+            }, I18n().apply {
+                lang = "it"
+                title = "Android About Library"
+                description = "La libreria AboutLibraries permette di generare in modo semplice un pagina di about interamente customizzabile con poco sforzo e codice."
+            })
+        }
+
+        return Info().apply {
+            this.author = author
+            this.projects = listOf(totalGPProject, meteoProject, aboutLibraryProject)
+        }
     }
 }

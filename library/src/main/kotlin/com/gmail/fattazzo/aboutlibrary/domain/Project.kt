@@ -69,7 +69,7 @@ class Project : Serializable {
 
     @SerializedName("i18n")
     @Expose
-    lateinit var i18n: List<I18n>
+    var i18n: List<I18n> = listOf()
 
     fun getI18n(lang: String = I18n.DEFAULT): I18n? {
         i18n.forEach {

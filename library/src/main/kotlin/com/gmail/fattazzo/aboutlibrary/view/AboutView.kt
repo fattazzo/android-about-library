@@ -57,6 +57,7 @@ open class AboutView(private val mContext: Context) {
     private var mErrorView: View = mInflater.inflate(R.layout.aboutlibrary_view_about_error, null)
 
     private var boxLayout: LinearLayout = mRootView.findViewById(R.id.boxLayout)
+    private var boxLayout2: LinearLayout? = mRootView.findViewById(R.id.boxLayout2)
 
     private var infoUrl: String? = null
     private var infoJsonSring: String? = null
@@ -208,7 +209,10 @@ open class AboutView(private val mContext: Context) {
     private fun buildOtherProjectsBox() {
         if (otherProjectsBox) {
             val otherProjectsBoxView = OtherProjectsView(mContext, info?.projects.orEmpty(), lang, additionalProjectButtons.toMap()).create()
-            boxLayout.addView(otherProjectsBoxView)
+            if (boxLayout2 != null) {
+                boxLayout2!!.addView(otherProjectsBoxView)
+            } else
+                boxLayout.addView(otherProjectsBoxView)
         }
     }
 
