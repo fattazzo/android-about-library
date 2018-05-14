@@ -25,6 +25,7 @@ Here's a quick overview of functions it include:
   - Name
   - Description
   - Store and project source button
+* Multiple screen support
 
 All the information can be displayed with multilanguage support!
 
