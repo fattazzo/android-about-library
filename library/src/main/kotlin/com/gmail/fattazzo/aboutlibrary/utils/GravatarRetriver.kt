@@ -47,7 +47,7 @@ object GravatarRetriver {
     }
 
     fun gravatarUrl(email: String,
-                    size: Int = 80,
+                    size: Int = 200,
                     default: GravatarDefault = GravatarDefault.WAVATAR,
                     secure: Boolean = false): String {
 
