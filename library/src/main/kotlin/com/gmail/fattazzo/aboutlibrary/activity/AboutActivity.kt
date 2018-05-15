@@ -29,20 +29,20 @@ package com.gmail.fattazzo.aboutlibrary.activity
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import com.gmail.fattazzo.aboutlibrary.view.AboutView
+import com.gmail.fattazzo.aboutlibrary.builder.AboutViewBuilder
 
 class AboutActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val aboutView = AboutView(this)
+        val aboutViewBuilder = AboutViewBuilder()
                 .withInfoUrl("https://gist.githubusercontent.com/fattazzo/d6aa41128c39b4882c0b6bd232984cfb/raw")
                 .withAppId("com.gmail.fattazzo.formula1world")
                 .withLang("it")
                 .withAppBox(true)
                 .withAuthorBox(true)
 
-        setContentView(aboutView.create())
+        setContentView(aboutViewBuilder.build(this))
     }
 }

@@ -36,15 +36,14 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:project="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="4dp"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
         <android.support.v7.widget.CardView
             android:id="@+id/authorCardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="4dp">
+            android:layout_margin="2dp">
 
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
@@ -89,114 +88,18 @@
                     project:layout_constraintTop_toBottomOf="@+id/textView7" />
 
                 <LinearLayout
+                    android:id="@+id/fabsLayout"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:gravity="end"
                     android:orientation="horizontal"
+                    android:paddingStart="0dp"
                     android:paddingEnd="8dp"
                     android:paddingTop="2dp"
                     project:layout_constraintEnd_toEndOf="parent"
                     project:layout_constraintStart_toStartOf="parent"
                     project:layout_constraintTop_toBottomOf="@+id/authorImageView">
-
-                    <android.support.design.widget.FloatingActionButton
-                        android:id="@+id/emailFAB"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_weight="1"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:visibility="gone"
-                        project:backgroundTint="@color/aboutlibrary_email"
-                        project:fabSize="mini"
-                        project:srcCompat="@drawable/aboutlibrary_email" />
-
-                    <android.support.design.widget.FloatingActionButton
-                        android:id="@+id/websiteFAB"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_weight="1"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:visibility="gone"
-                        project:backgroundTint="@color/aboutlibrary_website"
-                        project:fabSize="mini"
-                        project:srcCompat="@drawable/aboutlibrary_website" />
-
-                    <android.support.design.widget.FloatingActionButton
-                        android:id="@+id/githubFAB"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_weight="1"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:visibility="gone"
-                        project:backgroundTint="@color/aboutlibrary_github"
-                        project:fabSize="mini"
-                        project:srcCompat="@drawable/aboutlibrary_github" />
-
-                    <android.support.design.widget.FloatingActionButton
-                        android:id="@+id/facebookFAB"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_weight="1"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:visibility="gone"
-                        project:backgroundTint="@color/aboutlibrary_facebook"
-                        project:fabSize="mini"
-                        project:srcCompat="@drawable/aboutlibrary_facebook" />
-
-                    <android.support.design.widget.FloatingActionButton
-                        android:id="@+id/twitterFAB"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_weight="1"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:visibility="gone"
-                        project:backgroundTint="@color/aboutlibrary_twitter"
-                        project:fabSize="mini"
-                        project:srcCompat="@drawable/aboutlibrary_twitter" />
-
-                    <android.support.design.widget.FloatingActionButton
-                        android:id="@+id/googleplusFAB"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_weight="1"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:visibility="gone"
-                        project:backgroundTint="@color/aboutlibrary_googleplus"
-                        project:fabSize="mini"
-                        project:srcCompat="@drawable/aboutlibrary_gplus" />
-
-                    <android.support.design.widget.FloatingActionButton
-                        android:id="@+id/linkedinFAB"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_weight="1"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:visibility="gone"
-                        project:backgroundTint="@color/aboutlibrary_linkedin"
-                        project:fabSize="mini"
-                        project:srcCompat="@drawable/aboutlibrary_linkedin" />
 
                 </LinearLayout>
 

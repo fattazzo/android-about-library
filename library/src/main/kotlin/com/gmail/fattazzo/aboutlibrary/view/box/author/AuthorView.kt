@@ -35,18 +35,18 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Point
 import android.graphics.Rect
-import android.support.design.widget.FloatingActionButton
 import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.animation.DecelerateInterpolator
 import android.widget.FrameLayout
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import com.gmail.fattazzo.aboutlibrary.R
 import com.gmail.fattazzo.aboutlibrary.domain.Author
 import com.gmail.fattazzo.aboutlibrary.utils.GravatarRetriver
-import com.gmail.fattazzo.aboutlibrary.utils.Utils
+import com.gmail.fattazzo.aboutlibrary.view.buttons.AboutFab
 import com.squareup.picasso.Picasso
 
 
@@ -55,7 +55,7 @@ import com.squareup.picasso.Picasso
  *         <p/>
  *         date: 10/05/18
  */
-class AuthorView(private val mContext: Context, private val author: Author?) {
+class AuthorView(private val mContext: Context, private val author: Author?, private val additionalAuthorButtons: List<AboutFab>) {
 
     private var mInflater: LayoutInflater = LayoutInflater.from(mContext)
     private var mRootView: View = mInflater.inflate(R.layout.aboutlibrary_view_author, null)
@@ -71,43 +71,73 @@ class AuthorView(private val mContext: Context, private val author: Author?) {
         Picasso.get().load(GravatarRetriver.gravatarUrl(author?.email.orEmpty())).into(authorImageView)
         authorImageView.setOnClickListener { zoomImageFromThumb(authorImageView) }
 
-        bindEmailButton()
-        bindOpenLinkButton(R.id.websiteFAB, author?.website.isNullOrBlank(), author?.website)
-        bindOpenLinkButton(R.id.githubFAB, author?.github.isNullOrBlank(), author?.github)
-        bindOpenLinkButton(R.id.facebookFAB, author?.facebook.isNullOrBlank(), author?.facebook)
-        bindOpenLinkButton(R.id.twitterFAB, author?.twitter.isNullOrBlank(), author?.twitter)
-        bindOpenLinkButton(R.id.googleplusFAB, author?.googleplus.isNullOrBlank(), author?.googleplus)
-        bindOpenLinkButton(R.id.linkedinFAB, author?.linkedin.isNullOrBlank(), author?.linkedin)
+        val fabsLayout = mRootView.findViewById<LinearLayout>(R.id.fabsLayout)
+
+        author?.email?.let {
+            val fab = AboutFab(mContext).withDrawable(R.drawable.aboutlibrary_email).withColor(R.color.aboutlibrary_email)
+                    .withAction(View.OnClickListener {
+                        val intent = Intent(Intent.ACTION_SEND)
+                        intent.putExtra(Intent.EXTRA_EMAIL, arrayOf(this.author.email))
+                        intent.type = "message/rfc822"
+                        ContextCompat.startActivity(mContext, Intent.createChooser(intent, "Choose Mail Project"), null)
+                    })
+                    .create()
+            fabsLayout.addView(fab)
+        }
+
+        author?.website?.let {
+            val fab = createOpenLinkFab(R.drawable.aboutlibrary_website, R.color.aboutlibrary_website, it)
+            fabsLayout.addView(fab)
+        }
+        author?.github?.let {
+            val fab = createOpenLinkFab(R.drawable.aboutlibrary_github, R.color.aboutlibrary_github, it)
+            fabsLayout.addView(fab)
+        }
+        author?.facebook?.let {
+            val fab = createOpenLinkFab(R.drawable.aboutlibrary_facebook, R.color.aboutlibrary_facebook, it)
+            fabsLayout.addView(fab)
+        }
+        author?.twitter?.let {
+            val fab = createOpenLinkFab(R.drawable.aboutlibrary_twitter, R.color.aboutlibrary_twitter, it)
+            fabsLayout.addView(fab)
+        }
+        author?.googleplus?.let {
+            val fab = createOpenLinkFab(R.drawable.aboutlibrary_gplus, R.color.aboutlibrary_googleplus, it)
+            fabsLayout.addView(fab)
+        }
+        author?.linkedin?.let {
+            val fab = createOpenLinkFab(R.drawable.aboutlibrary_linkedin, R.color.aboutlibrary_linkedin, it)
+            fabsLayout.addView(fab)
+        }
+
+        additionalAuthorButtons.forEach { fabsLayout.addView(it.create()) }
 
         return mRootView
     }
 
-    private fun bindEmailButton() {
-
-        val emailFAB = mRootView.findViewById<FloatingActionButton>(R.id.emailFAB)
-        if (author?.email.isNullOrBlank()) {
-            emailFAB.visibility = View.GONE
-        } else {
-            emailFAB.visibility = View.VISIBLE
-            emailFAB.setOnClickListener {
-                val intent = Intent(Intent.ACTION_SEND)
-                intent.putExtra(Intent.EXTRA_EMAIL, arrayOf(this.author?.email))
-                intent.type = "message/rfc822"
-                ContextCompat.startActivity(mContext, Intent.createChooser(intent, "Choose Mail Project"), null)
-            }
-        }
+    private fun createOpenLinkFab(drawableResId: Int, colorResId: Int, url: String): View {
+        return AboutFab(mContext)
+                .withDrawable(drawableResId)
+                .withColor(colorResId)
+                .withUrl(url)
+                .create()
     }
 
-    private fun bindOpenLinkButton(fabResId: Int, hide: Boolean, link: String?) {
-        val fab = mRootView.findViewById<FloatingActionButton>(fabResId)
-        if (hide) {
-            fab.visibility = View.GONE
+    private fun bindEmailButton() {
+        /**
+        val emailFAB = mRootView.findViewById<FloatingActionButton>(R.id.emailFAB)
+        if (author?.email.isNullOrBlank()) {
+        emailFAB.visibility = View.GONE
         } else {
-            fab.visibility = View.VISIBLE
-            fab.setOnClickListener {
-                Utils.openLink(mContext, link)
-            }
+        emailFAB.visibility = View.VISIBLE
+        emailFAB.setOnClickListener {
+        val intent = Intent(Intent.ACTION_SEND)
+        intent.putExtra(Intent.EXTRA_EMAIL, arrayOf(this.author?.email))
+        intent.type = "message/rfc822"
+        ContextCompat.startActivity(mContext, Intent.createChooser(intent, "Choose Mail Project"), null)
         }
+        }
+         **/
     }
 
     private fun zoomImageFromThumb(thumbView: ImageView) {

@@ -37,9 +37,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.gmail.fattazzo.aboutlibrary.R
 import com.gmail.fattazzo.aboutlibrary.domain.Project
-import com.gmail.fattazzo.aboutlibrary.view.buttons.AboutActionButton
 import com.gmail.fattazzo.aboutlibrary.view.buttons.AboutButton
-import com.gmail.fattazzo.aboutlibrary.view.buttons.AboutUrlButton
 import com.squareup.picasso.Picasso
 
 
@@ -73,30 +71,34 @@ class AppView(private val mContext: Context, private val project: Project, priva
 
         val buttons = mutableListOf<View>()
         project.playStoreUrl?.let {
-            buttons.add(AboutUrlButton(mContext, it)
+            buttons.add(AboutButton(mContext)
                     .withText(R.string.aboutlibrary_play_store)
                     .withDrawable(R.drawable.aboutlibrary_googleplay)
+                    .withUrl(it)
                     .create())
         }
 
         project.githubUrl?.let {
-            buttons.add(AboutUrlButton(mContext, it)
+            buttons.add(AboutButton(mContext)
                     .withText(R.string.aboutlibrary_github_project)
                     .withDrawable(R.drawable.aboutlibrary_github)
+                    .withUrl(it)
                     .create())
         }
 
         project.websiteUrl?.let {
-            buttons.add(AboutUrlButton(mContext, it)
+            buttons.add(AboutButton(mContext)
                     .withText(R.string.aboutlibrary_website)
                     .withDrawable(R.drawable.aboutlibrary_website)
+                    .withUrl(it)
                     .create())
         }
 
         project.wikiUrl?.let {
-            buttons.add(AboutUrlButton(mContext, it)
+            buttons.add(AboutButton(mContext)
                     .withText(R.string.aboutlibrary_wiki)
                     .withDrawable(R.drawable.aboutlibrary_wiki)
+                    .withUrl(it)
                     .create())
         }
 
@@ -135,9 +137,10 @@ class AppView(private val mContext: Context, private val project: Project, priva
         return project.playStoreUrl?.let {
             val rateItUrl = "market://details?id=${it.substringAfter("id=")}"
 
-            AboutActionButton(mContext, View.OnClickListener { mContext.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(rateItUrl))) })
+            AboutButton(mContext)
                     .withText(R.string.aboutlibrary_rate_it)
                     .withDrawable(R.drawable.aboutlibrary_star)
+                    .withAction(View.OnClickListener { mContext.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(rateItUrl))) })
                     .create()
         }
     }

@@ -30,11 +30,11 @@ package com.gmail.fattazzo.aboutlibrary.sample
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.*
+import com.gmail.fattazzo.aboutlibrary.builder.AboutViewBuilder
 import com.gmail.fattazzo.aboutlibrary.domain.Author
 import com.gmail.fattazzo.aboutlibrary.domain.I18n
 import com.gmail.fattazzo.aboutlibrary.domain.Info
 import com.gmail.fattazzo.aboutlibrary.domain.Project
-import com.gmail.fattazzo.aboutlibrary.view.AboutView
 import org.androidannotations.annotations.*
 import org.androidannotations.annotations.res.StringArrayRes
 
@@ -73,7 +73,7 @@ open class MainActivity : AppCompatActivity() {
 
     @JvmField
     @InstanceState
-    var aboutView: AboutView? = null
+    var aboutViewBuilder: AboutViewBuilder? = null
 
 
     @AfterViews
@@ -86,7 +86,7 @@ open class MainActivity : AppCompatActivity() {
         appAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         appSpinner.adapter = appAdapter
 
-        if (aboutView != null) {
+        if (aboutViewBuilder != null) {
             loadButtonClicked()
         } else {
             aboutLayout.visibility = View.GONE
@@ -101,8 +101,8 @@ open class MainActivity : AppCompatActivity() {
         aboutLayout.visibility = View.VISIBLE
         aboutLayout.removeAllViews()
 
-        if (aboutView == null) {
-            aboutView = AboutView(this)
+        if (aboutViewBuilder == null) {
+            aboutViewBuilder = AboutViewBuilder()
                     // ------------- Info --------------------------
                     //.withInfoUrl("https://gist.githubusercontent.com/fattazzo/d6aa41128c39b4882c0b6bd232984cfb/raw")
                     .withInfo(createInfoSample())
@@ -118,12 +118,12 @@ open class MainActivity : AppCompatActivity() {
                     .withExcludeThisAppFromProjects(true)
         }
 
-        aboutLayout.addView(aboutView!!.create())
+        aboutLayout.addView(aboutViewBuilder!!.build(this))
     }
 
     @Click
     fun resetButtonClicked() {
-        aboutView = null
+        aboutViewBuilder = null
 
         aboutLayout.visibility = View.GONE
         aboutLayout.removeAllViews()

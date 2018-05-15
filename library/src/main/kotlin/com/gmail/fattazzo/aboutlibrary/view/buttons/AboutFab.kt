@@ -1,6 +1,6 @@
 /*
  * Project: android-about-library
- * File: AboutButton.kt
+ * File: AboutFab.kt
  *
  * Created by fattazzo
  * Copyright © 2018 Gianluca Fattarsi. All rights reserved.
@@ -28,81 +28,67 @@
 package com.gmail.fattazzo.aboutlibrary.view.buttons
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
+import android.support.design.widget.FloatingActionButton
 import android.support.v4.content.ContextCompat
 import android.view.View
-import android.widget.Button
+import android.view.ViewGroup
+import android.widget.LinearLayout
 import com.gmail.fattazzo.aboutlibrary.R
 import com.gmail.fattazzo.aboutlibrary.utils.Utils
+
 
 /**
  * @author fattazzo
  *         <p/>
  *         date: 14/05/18
  */
-class AboutButton(private val mContext: Context) {
-
-    private var text: String = ""
-
-    private var textColor: Int = R.color.aboutlibrary_black
-
-    private var backgroundDark = false
+class AboutFab(private val mContext: Context) {
 
     private var drawable: Drawable? = null
 
     private var action: View.OnClickListener? = null
 
-    fun withUrl(url : String) : AboutButton {
+    private var url: String? = null
+
+    private var color: Int = R.color.aboutlibrary_light_gray
+
+    fun withColor(color: Int): AboutFab {
+        this.color = color
+        return this
+    }
+
+    fun withUrl(url: String): AboutFab {
         this.action = View.OnClickListener { Utils.openLink(mContext, url) }
         return this
     }
 
-    fun withAction(action: View.OnClickListener): AboutButton {
+    fun withAction(action: View.OnClickListener): AboutFab {
         this.action = action
         return this
     }
 
-    fun withDrawable(drawableResId: Int): AboutButton {
+    fun withDrawable(drawableResId: Int): AboutFab {
         this.drawable = mContext.getDrawable(drawableResId)
         return this
     }
 
-    fun withDrawable(drawable: Drawable): AboutButton {
+    fun withDrawable(drawable: Drawable): AboutFab {
         this.drawable = drawable
         return this
     }
 
-    fun withText(textResId: Int): AboutButton {
-        this.text = mContext.getString(textResId)
-        return this
-    }
-
-    fun withText(text: String): AboutButton {
-        this.text = text
-        return this
-    }
-
-    fun withTextColor(textColorResId: Int): AboutButton {
-        this.textColor = textColorResId
-        return this
-    }
-
-    fun withBackgroundDark(darkBG: Boolean = true): AboutButton {
-        this.backgroundDark = darkBG
-        return this
-    }
-
     fun create(): View {
-        val button = Button(mContext)
-        button.text = text
-        button.setTextColor(ContextCompat.getColor(mContext, textColor))
-        button.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null)
+        val fab = FloatingActionButton(mContext)
+        fab.setImageDrawable(drawable)
+        fab.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(mContext, color))
+        fab.setOnClickListener(action)
+        fab.size = FloatingActionButton.SIZE_MINI
 
-        val drawableBG = if (backgroundDark) R.drawable.aboutlibrary_button_background else R.drawable.aboutlibrary_button_background_white
-        button.background = mContext.getDrawable(drawableBG)
-
-        button.setOnClickListener(action)
-
-        return button
+        val params = LinearLayout.LayoutParams(ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT))
+        params.setMargins(8, 0, 0, 8)
+        fab.layoutParams = params
+        return fab
     }
 }

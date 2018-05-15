@@ -20,4 +20,13 @@
         <item name="android:textSize">@dimen/aboutlibrary_font_size_big</item>
     </style>
 
+    <style name="AndroidLibraryCollapsingTextAppearance" parent="Base.TextAppearance.AppCompat.Widget.ActionBar.Title" />
+
+    <style name="AndroidLibraryCollapsingTextAppearance.Inverse">
+        <item name="android:textSize">@dimen/aboutlibrary_font_size_large</item>
+        <item name="android:textColor">@color/aboutlibrary_black</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
 </resources>

@@ -34,6 +34,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
 import com.gmail.fattazzo.aboutlibrary.R
+import com.gmail.fattazzo.aboutlibrary.builder.AboutViewBuilder
 import com.gmail.fattazzo.aboutlibrary.domain.Info
 import com.gmail.fattazzo.aboutlibrary.loader.Closure
 import com.gmail.fattazzo.aboutlibrary.loader.InfoBuilder
@@ -41,7 +42,6 @@ import com.gmail.fattazzo.aboutlibrary.loader.InfoDownloaderTask
 import com.gmail.fattazzo.aboutlibrary.view.box.app.AppView
 import com.gmail.fattazzo.aboutlibrary.view.box.author.AuthorView
 import com.gmail.fattazzo.aboutlibrary.view.box.projects.OtherProjectsView
-import com.gmail.fattazzo.aboutlibrary.view.buttons.AboutButton
 import java.io.Serializable
 import java.net.URL
 
@@ -51,7 +51,7 @@ import java.net.URL
  *         <p/>
  *         date: 10/05/18
  */
-open class AboutView(private val mContext: Context) : Serializable {
+class AboutView(private val mContext: Context, private val builder: AboutViewBuilder) : Serializable {
 
     private lateinit var mInflater: LayoutInflater
     private lateinit var mRootView: View
@@ -59,82 +59,6 @@ open class AboutView(private val mContext: Context) : Serializable {
 
     private lateinit var boxLayout: LinearLayout
     private var boxLayout2: LinearLayout? = null
-
-    // -------------------- Info -------------------------
-    private var infoUrl: String? = null
-    private var infoJsonSring: String? = null
-    private var info: Info? = null
-
-    // -------------------- Main Params ------------------
-    private var lang: String = "default"
-    private var idApp: String = ""
-
-    // -------------------- About this app section -------
-    private var appBox = true
-    private var additionalAppButtons = listOf<AboutButton>()
-
-    // -------------------- Author section ---------------
-    private var authorBox = true
-
-    // -------------------- Other projects section -------
-    private var otherProjectsBox = true
-    private var additionalProjectButtons = mutableMapOf<String, List<AboutButton>>()
-    private var excludeThisAppFromProjects = false
-
-    fun withExcludeThisAppFromProjects(exclude: Boolean = false): AboutView {
-        this.excludeThisAppFromProjects = exclude
-        return this
-    }
-
-    fun withAdditionalAppButtons(buttons: List<AboutButton>): AboutView {
-        this.additionalAppButtons = buttons
-        return this
-    }
-
-    fun withAdditionalProjectButtons(appId: String, buttons: List<AboutButton>): AboutView {
-        this.additionalProjectButtons[appId] = buttons
-        return this
-    }
-
-    fun withInfoUrl(infoUrl: String): AboutView {
-        this.infoUrl = infoUrl
-        return this
-    }
-
-    fun withInfo(info: Info): AboutView {
-        this.info = info
-        return this
-    }
-
-    fun withInfoJsonSring(infoJsonSring: String): AboutView {
-        this.infoJsonSring = infoJsonSring
-        return this
-    }
-
-    fun withAppId(idApp: String): AboutView {
-        this.idApp = idApp
-        return this
-    }
-
-    fun withLang(lang: String = "default"): AboutView {
-        this.lang = lang
-        return this
-    }
-
-    fun withAppBox(appBox: Boolean): AboutView {
-        this.appBox = appBox
-        return this
-    }
-
-    fun withAuthorBox(authorBox: Boolean): AboutView {
-        this.authorBox = authorBox
-        return this
-    }
-
-    fun withOtherProjectsBox(otherProjectsBox: Boolean): AboutView {
-        this.otherProjectsBox = otherProjectsBox
-        return this
-    }
 
     /**
      * Assemble and build the view based on the configured parameters.
@@ -168,7 +92,7 @@ open class AboutView(private val mContext: Context) : Serializable {
      *
      */
     private fun create(info: Info): View {
-        this.info = info
+        this.builder.withInfo(info)
         Handler().post({ bindView() })
 
         return mRootView
@@ -190,9 +114,9 @@ open class AboutView(private val mContext: Context) : Serializable {
             boxLayout2 = mRootView.findViewById(R.id.boxLayout2)
 
             return when {
-                info != null -> create(info!!)
-                !infoJsonSring.isNullOrBlank() -> create(infoJsonSring!!)
-                !infoUrl.isNullOrBlank() -> create(URL(infoUrl))
+                builder.info != null -> create(builder.info!!)
+                !builder.infoJsonSring.isNullOrBlank() -> create(builder.infoJsonSring!!)
+                !builder.infoUrl.isNullOrBlank() -> create(URL(builder.infoUrl))
                 else -> mErrorView
             }
         } catch (e: Exception) {
@@ -202,7 +126,7 @@ open class AboutView(private val mContext: Context) : Serializable {
 
     private fun bindView() {
         boxLayout.removeAllViews()
-        if (info != null) {
+        if (builder.info != null) {
             buildAppBox()
             buildAuthorBox()
             buildOtherProjectsBox()
@@ -212,29 +136,29 @@ open class AboutView(private val mContext: Context) : Serializable {
     }
 
     private fun buildAppBox() {
-        val app = info?.getProjectById(idApp)
-        if (appBox && app != null) {
-            val appBoxView = AppView(mContext, app, lang, additionalAppButtons).create()
+        val app = builder.info?.getProjectById(builder.idApp)
+        if (builder.appBox && app != null) {
+            val appBoxView = AppView(mContext, app, builder.lang, builder.additionalAppButtons).create()
             boxLayout.addView(appBoxView)
         }
     }
 
     private fun buildAuthorBox() {
-        if (authorBox) {
-            val authorBoxView = AuthorView(mContext, info?.author).create()
+        if (builder.authorBox) {
+            val authorBoxView = AuthorView(mContext, builder.info?.author, builder.additionalAuthorButtons).create()
             boxLayout.addView(authorBoxView)
         }
     }
 
     private fun buildOtherProjectsBox() {
-        if (otherProjectsBox) {
+        if (builder.otherProjectsBox) {
 
-            var projects = info?.projects.orEmpty()
-            if (excludeThisAppFromProjects) {
-                projects = projects.filter { it.id != idApp }
+            var projects = builder.info?.projects.orEmpty()
+            if (builder.excludeThisAppFromProjects) {
+                projects = projects.filter { it.id != builder.idApp }
             }
 
-            val otherProjectsBoxView = OtherProjectsView(mContext, projects, lang, additionalProjectButtons.toMap()).create()
+            val otherProjectsBoxView = OtherProjectsView(mContext, projects, builder.lang, builder.additionalProjectButtons.toMap()).create()
             if (boxLayout2 != null) {
                 boxLayout2!!.addView(otherProjectsBoxView)
             } else
@@ -246,13 +170,14 @@ open class AboutView(private val mContext: Context) : Serializable {
         val loadingLayout = mRootView.findViewById<ConstraintLayout>(R.id.loadingLayout)
         loadingLayout.visibility = View.VISIBLE
 
-        info = try {
+        val info: Info? = try {
             InfoBuilder.build(json)
         } catch (e: Exception) {
             null
         } finally {
             loadingLayout.visibility = View.GONE
         }
+        builder.withInfo(info)
         bindView()
     }
 
@@ -262,13 +187,13 @@ open class AboutView(private val mContext: Context) : Serializable {
 
         InfoDownloaderTask(object : Closure<Info?> {
             override fun onPostExecute(result: Info?) {
-                info = result
+                builder.withInfo(result)
                 loadingLayout.visibility = View.GONE
                 bindView()
             }
 
             override fun onCancel() {
-                info = null
+                builder.withInfo(null)
                 loadingLayout.visibility = View.GONE
                 bindView()
             }

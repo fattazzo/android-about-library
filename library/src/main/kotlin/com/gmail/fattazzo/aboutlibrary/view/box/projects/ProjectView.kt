@@ -36,7 +36,6 @@ import android.widget.TextView
 import com.gmail.fattazzo.aboutlibrary.R
 import com.gmail.fattazzo.aboutlibrary.domain.Project
 import com.gmail.fattazzo.aboutlibrary.view.buttons.AboutButton
-import com.gmail.fattazzo.aboutlibrary.view.buttons.AboutUrlButton
 import com.squareup.picasso.Picasso
 
 /**
@@ -111,11 +110,12 @@ class ProjectView(private val mContext: Context, private val project: Project, p
     }
 
     private fun buildButton(textResId: Int, textColor: Int, drawableResId: Int, urlToOpen: String): View {
-        return AboutUrlButton(mContext, urlToOpen)
+        return AboutButton(mContext)
                 .withText(textResId)
                 .withTextColor(textColor)
                 .withDrawable(drawableResId)
                 .withBackgroundDark()
+                .withUrl(urlToOpen)
                 .create()
     }
 }
