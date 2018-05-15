@@ -82,7 +82,7 @@ class AboutActivity : Activity() {
 * **withAuthorBox**: Toggle "Author section"
 * **withOtherProjectsBox**: Toggle "Other projects section"
 
-For advanced configuration please refer to the wiki.
+For advanced configuration please refer to the [wiki](https://github.com/fattazzo/android-about-library/wiki).
 
 ## Screenshots from sample app
 
