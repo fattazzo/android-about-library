@@ -28,6 +28,8 @@
 package com.gmail.fattazzo.aboutlibrary.view.box.app
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.support.v7.widget.GridLayout
 import android.view.LayoutInflater
 import android.view.View
@@ -35,6 +37,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.gmail.fattazzo.aboutlibrary.R
 import com.gmail.fattazzo.aboutlibrary.domain.Project
+import com.gmail.fattazzo.aboutlibrary.view.buttons.AboutActionButton
 import com.gmail.fattazzo.aboutlibrary.view.buttons.AboutButton
 import com.gmail.fattazzo.aboutlibrary.view.buttons.AboutUrlButton
 import com.squareup.picasso.Picasso
@@ -97,6 +100,9 @@ class AppView(private val mContext: Context, private val project: Project, priva
                     .create())
         }
 
+        val rateItButton = buildRateItButton()
+        rateItButton?.let { buttons.add(it) }
+
         additionalAppButtons.forEach { buttons.add(it.create()) }
 
         val columns = mContext.resources.getInteger(R.integer.aboutlibrary_app_button_columns)
@@ -122,6 +128,17 @@ class AppView(private val mContext: Context, private val project: Project, priva
             button.layoutParams = param
             i++
             column++
+        }
+    }
+
+    private fun buildRateItButton(): View? {
+        return project.playStoreUrl?.let {
+            val rateItUrl = "market://details?id=${it.substringAfter("id=")}"
+
+            AboutActionButton(mContext, View.OnClickListener { mContext.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(rateItUrl))) })
+                    .withText(R.string.aboutlibrary_rate_it)
+                    .withDrawable(R.drawable.aboutlibrary_star)
+                    .create()
         }
     }
 }
