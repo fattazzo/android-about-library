@@ -61,15 +61,15 @@ class AboutActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val aboutView = AboutView(this)
-                .withInfoUrl(INFO_URL)
-                .withAppId(this@AboutActivity.applicationContext.packageName)
-                .withLang(Locale.getDefault().language)
-                .withAppBox(appCheckBox.isChecked)
-                .withAuthorBox(authorCheckBox.isChecked)
-                .withOtherProjectsBox(otherProjectsCheckBox.isChecked)
+        val aboutViewBuilder = AboutViewBuilder()
+                        .withInfoUrl(INFO_URL)
+                        .withAppId(this@AboutActivity.applicationContext.packageName)
+                        .withLang("it")
+                        .withAppBox(true) // default true
+                        .withAuthorBox(true) // default true
+                        .withOtherProjectsBox(true) // default true
 
-        setContentView(aboutView.create())
+        setContentView(aboutViewBuilder.build(this))
     }
 }
 ```
