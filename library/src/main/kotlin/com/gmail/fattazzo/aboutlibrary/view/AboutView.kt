@@ -42,6 +42,7 @@ import com.gmail.fattazzo.aboutlibrary.view.box.app.AppView
 import com.gmail.fattazzo.aboutlibrary.view.box.author.AuthorView
 import com.gmail.fattazzo.aboutlibrary.view.box.projects.OtherProjectsView
 import com.gmail.fattazzo.aboutlibrary.view.buttons.AboutButton
+import java.io.Serializable
 import java.net.URL
 
 
@@ -50,28 +51,40 @@ import java.net.URL
  *         <p/>
  *         date: 10/05/18
  */
-open class AboutView(private val mContext: Context) {
+open class AboutView(private val mContext: Context) : Serializable {
 
-    private var mInflater: LayoutInflater = LayoutInflater.from(mContext)
-    private var mRootView: View = mInflater.inflate(R.layout.aboutlibrary_view_about, null)
-    private var mErrorView: View = mInflater.inflate(R.layout.aboutlibrary_view_about_error, null)
+    private lateinit var mInflater: LayoutInflater
+    private lateinit var mRootView: View
+    private lateinit var mErrorView: View
 
-    private var boxLayout: LinearLayout = mRootView.findViewById(R.id.boxLayout)
-    private var boxLayout2: LinearLayout? = mRootView.findViewById(R.id.boxLayout2)
+    private lateinit var boxLayout: LinearLayout
+    private var boxLayout2: LinearLayout? = null
 
+    // -------------------- Info -------------------------
     private var infoUrl: String? = null
     private var infoJsonSring: String? = null
     private var info: Info? = null
 
-    private var appBox = true
-    private var authorBox = true
-    private var otherProjectsBox = true
-
+    // -------------------- Main Params ------------------
     private var lang: String = "default"
     private var idApp: String = ""
 
+    // -------------------- About this app section -------
+    private var appBox = true
     private var additionalAppButtons = listOf<AboutButton>()
+
+    // -------------------- Author section ---------------
+    private var authorBox = true
+
+    // -------------------- Other projects section -------
+    private var otherProjectsBox = true
     private var additionalProjectButtons = mutableMapOf<String, List<AboutButton>>()
+    private var excludeThisAppFromProjects = false
+
+    fun withExcludeThisAppFromProjects(exclude: Boolean = false): AboutView {
+        this.excludeThisAppFromProjects = exclude
+        return this
+    }
 
     fun withAdditionalAppButtons(buttons: List<AboutButton>): AboutView {
         this.additionalAppButtons = buttons
@@ -169,6 +182,13 @@ open class AboutView(private val mContext: Context) {
      */
     fun create(): View {
         return try {
+            mInflater = LayoutInflater.from(mContext)
+            mRootView = mInflater.inflate(R.layout.aboutlibrary_view_about, null)
+            mErrorView = mInflater.inflate(R.layout.aboutlibrary_view_about_error, null)
+
+            boxLayout = mRootView.findViewById(R.id.boxLayout)
+            boxLayout2 = mRootView.findViewById(R.id.boxLayout2)
+
             return when {
                 info != null -> create(info!!)
                 !infoJsonSring.isNullOrBlank() -> create(infoJsonSring!!)
@@ -208,7 +228,13 @@ open class AboutView(private val mContext: Context) {
 
     private fun buildOtherProjectsBox() {
         if (otherProjectsBox) {
-            val otherProjectsBoxView = OtherProjectsView(mContext, info?.projects.orEmpty(), lang, additionalProjectButtons.toMap()).create()
+
+            var projects = info?.projects.orEmpty()
+            if (excludeThisAppFromProjects) {
+                projects = projects.filter { it.id != idApp }
+            }
+
+            val otherProjectsBoxView = OtherProjectsView(mContext, projects, lang, additionalProjectButtons.toMap()).create()
             if (boxLayout2 != null) {
                 boxLayout2!!.addView(otherProjectsBoxView)
             } else
