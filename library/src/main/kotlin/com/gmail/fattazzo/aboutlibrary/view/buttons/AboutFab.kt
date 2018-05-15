@@ -50,8 +50,6 @@ class AboutFab(private val mContext: Context) {
 
     private var action: View.OnClickListener? = null
 
-    private var url: String? = null
-
     private var color: Int = R.color.aboutlibrary_light_gray
 
     fun withColor(color: Int): AboutFab {

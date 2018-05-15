@@ -42,6 +42,7 @@ class AboutActivity : AppCompatActivity() {
                 .withLang("it")
                 .withAppBox(true)
                 .withAuthorBox(true)
+                .withOtherProjectsBox(true)
 
         setContentView(aboutViewBuilder.build(this))
     }
