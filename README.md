@@ -88,6 +88,8 @@ For advanced configuration please refer to the wiki.
 
 Standard screen
 
+![](https://github.com/fattazzo/android-about-library/wiki/images/about.gif)
+
 ![](https://github.com/fattazzo/android-about-library/wiki/images/screenshot01.png)
 
 ![](https://github.com/fattazzo/android-about-library/wiki/images/screenshot02.png)
