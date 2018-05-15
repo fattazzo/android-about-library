@@ -35,10 +35,7 @@ import com.gmail.fattazzo.aboutlibrary.domain.I18n
 import com.gmail.fattazzo.aboutlibrary.domain.Info
 import com.gmail.fattazzo.aboutlibrary.domain.Project
 import com.gmail.fattazzo.aboutlibrary.view.AboutView
-import org.androidannotations.annotations.AfterViews
-import org.androidannotations.annotations.Click
-import org.androidannotations.annotations.EActivity
-import org.androidannotations.annotations.ViewById
+import org.androidannotations.annotations.*
 import org.androidannotations.annotations.res.StringArrayRes
 
 
@@ -74,6 +71,11 @@ open class MainActivity : AppCompatActivity() {
     @StringArrayRes(R.array.projects_list_id)
     internal lateinit var projectsIdArrayRes: Array<String>
 
+    @JvmField
+    @InstanceState
+    var aboutView: AboutView? = null
+
+
     @AfterViews
     fun initViews() {
         val langAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, langDesArrayRes)
@@ -83,6 +85,13 @@ open class MainActivity : AppCompatActivity() {
         val appAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, projectsDescArrayRes)
         appAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         appSpinner.adapter = appAdapter
+
+        if (aboutView != null) {
+            loadButtonClicked()
+        } else {
+            aboutLayout.visibility = View.GONE
+            paramsLayout.visibility = View.VISIBLE
+        }
     }
 
     @Click
@@ -92,20 +101,30 @@ open class MainActivity : AppCompatActivity() {
         aboutLayout.visibility = View.VISIBLE
         aboutLayout.removeAllViews()
 
-        val aboutView = AboutView(this)
-                //.withInfoUrl("https://gist.githubusercontent.com/fattazzo/d6aa41128c39b4882c0b6bd232984cfb/raw")
-                .withInfo(createInfoSample())
-                .withAppId(projectsIdArrayRes[appSpinner.selectedItemPosition])
-                .withLang(langCodeArrayRes[langSpinner.selectedItemPosition])
-                .withAppBox(appCheckBox.isChecked)
-                .withAuthorBox(authorCheckBox.isChecked)
-                .withOtherProjectsBox(otherProjectsCheckBox.isChecked)
+        if (aboutView == null) {
+            aboutView = AboutView(this)
+                    // ------------- Info --------------------------
+                    //.withInfoUrl("https://gist.githubusercontent.com/fattazzo/d6aa41128c39b4882c0b6bd232984cfb/raw")
+                    .withInfo(createInfoSample())
+                    // ------------- Main params -------------------
+                    .withAppId(projectsIdArrayRes[appSpinner.selectedItemPosition])
+                    .withLang(langCodeArrayRes[langSpinner.selectedItemPosition])
+                    // ------------- About this app section --------
+                    .withAppBox(appCheckBox.isChecked)
+                    // ------------- Author section ----------------
+                    .withAuthorBox(authorCheckBox.isChecked)
+                    // ------------- Other projects section --------
+                    .withOtherProjectsBox(otherProjectsCheckBox.isChecked)
+                    .withExcludeThisAppFromProjects(true)
+        }
 
-        aboutLayout.addView(aboutView.create())
+        aboutLayout.addView(aboutView!!.create())
     }
 
     @Click
     fun resetButtonClicked() {
+        aboutView = null
+
         aboutLayout.visibility = View.GONE
         aboutLayout.removeAllViews()
 
