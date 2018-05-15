@@ -90,12 +90,6 @@ Standard screen
 
 ![](https://github.com/fattazzo/android-about-library/wiki/images/about.gif)
 
-![](https://github.com/fattazzo/android-about-library/wiki/images/screenshot01.png)
-
-![](https://github.com/fattazzo/android-about-library/wiki/images/screenshot02.png)
-
-![](https://github.com/fattazzo/android-about-library/wiki/images/screenshot03.png)
-
 Landscape standard screen
 
 ![](https://github.com/fattazzo/android-about-library/wiki/images/screenshot05.png)
