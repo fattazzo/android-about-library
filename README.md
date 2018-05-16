@@ -43,7 +43,7 @@ repositories {
 add the following dependency to your `build.gradle`
 
 ```javascript
-implementation "com.github.fattazzoandroid-about-library:0.4"
+implementation "com.github.fattazzoandroid-about-library:0.5"
 
 //required support lib modules
 implementation "com.android.support:appcompat-v7:${versions.supportLib}"
@@ -69,7 +69,9 @@ class AboutActivity : Activity() {
                         .withAuthorBox(true) // default true
                         .withOtherProjectsBox(true) // default true
 
-        setContentView(aboutViewBuilder.build(this))
+        val intent = Intent(this, com.gmail.fattazzo.aboutlibrary.activity.AboutActivity::class.java)
+                        .apply { putExtra(AboutActivity.EXTRA_BUILDER, aboutViewBuilder) }
+        startActivity(intent)
     }
 }
 ```
