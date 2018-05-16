@@ -32,6 +32,7 @@ import android.os.Handler
 import android.support.constraint.ConstraintLayout
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.ImageView
 import android.widget.LinearLayout
 import com.gmail.fattazzo.aboutlibrary.R
 import com.gmail.fattazzo.aboutlibrary.builder.AboutViewBuilder
@@ -42,6 +43,7 @@ import com.gmail.fattazzo.aboutlibrary.loader.InfoDownloaderTask
 import com.gmail.fattazzo.aboutlibrary.view.box.app.AppView
 import com.gmail.fattazzo.aboutlibrary.view.box.author.AuthorView
 import com.gmail.fattazzo.aboutlibrary.view.box.projects.OtherProjectsView
+import com.squareup.picasso.Picasso
 import java.io.Serializable
 import java.net.URL
 
@@ -126,6 +128,10 @@ class AboutView(private val mContext: Context, private val builder: AboutViewBui
 
     private fun bindView() {
         boxLayout.removeAllViews()
+
+        val aboutBgImageView = mRootView.findViewById<ImageView>(R.id.aboutBgImageView)
+        Picasso.get().load(R.drawable.aboutlibrary_background).into(aboutBgImageView)
+
         if (builder.info != null) {
             buildAppBox()
             buildAuthorBox()

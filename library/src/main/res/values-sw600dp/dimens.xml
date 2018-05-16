@@ -8,4 +8,5 @@
     <dimen name="aboutlibrary_app_icon_size">96dp</dimen>
 
     <dimen name="aboutlibrary_about_image_height">280dp</dimen>
+    <dimen name="aboutlibrary_about_image_overlap">150dp</dimen>
 </resources>
