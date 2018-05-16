@@ -7,7 +7,7 @@
     <application>
         <activity
             android:name=".activity.AboutActivity"
-            android:theme="@style/AppThemeAndroidLibrary" />
+            android:theme="@style/AndroidLibraryAppThemeAndroidLibrary" />
     </application>
 
 </manifest>

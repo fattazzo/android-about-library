@@ -28,80 +28,37 @@
 package com.gmail.fattazzo.aboutlibrary.view.buttons
 
 import android.content.Context
-import android.graphics.drawable.Drawable
 import android.support.v4.content.ContextCompat
 import android.view.View
 import android.widget.Button
 import com.gmail.fattazzo.aboutlibrary.R
+import com.gmail.fattazzo.aboutlibrary.builder.AboutButtonBuilder
 import com.gmail.fattazzo.aboutlibrary.utils.Utils
+import java.io.Serializable
 
 /**
  * @author fattazzo
  *         <p/>
  *         date: 14/05/18
  */
-class AboutButton(private val mContext: Context) {
-
-    private var text: String = ""
-
-    private var textColor: Int = R.color.aboutlibrary_black
-
-    private var backgroundDark = false
-
-    private var drawable: Drawable? = null
-
-    private var action: View.OnClickListener? = null
-
-    fun withUrl(url : String) : AboutButton {
-        this.action = View.OnClickListener { Utils.openLink(mContext, url) }
-        return this
-    }
-
-    fun withAction(action: View.OnClickListener): AboutButton {
-        this.action = action
-        return this
-    }
-
-    fun withDrawable(drawableResId: Int): AboutButton {
-        this.drawable = mContext.getDrawable(drawableResId)
-        return this
-    }
-
-    fun withDrawable(drawable: Drawable): AboutButton {
-        this.drawable = drawable
-        return this
-    }
-
-    fun withText(textResId: Int): AboutButton {
-        this.text = mContext.getString(textResId)
-        return this
-    }
-
-    fun withText(text: String): AboutButton {
-        this.text = text
-        return this
-    }
-
-    fun withTextColor(textColorResId: Int): AboutButton {
-        this.textColor = textColorResId
-        return this
-    }
-
-    fun withBackgroundDark(darkBG: Boolean = true): AboutButton {
-        this.backgroundDark = darkBG
-        return this
-    }
+class AboutButton(private val mContext: Context, private val builder: AboutButtonBuilder) : Serializable {
 
     fun create(): View {
         val button = Button(mContext)
-        button.text = text
-        button.setTextColor(ContextCompat.getColor(mContext, textColor))
-        button.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null)
+        button.text = if (builder.textResId != null) mContext.getString(builder.textResId!!) else builder.text
+        button.setTextColor(ContextCompat.getColor(mContext, builder.textColor))
 
-        val drawableBG = if (backgroundDark) R.drawable.aboutlibrary_button_background else R.drawable.aboutlibrary_button_background_white
+        if (builder.drawableResId != null) {
+            button.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(mContext, builder.drawableResId!!), null, null, null)
+        }
+
+        val drawableBG = if (builder.backgroundDark) R.drawable.aboutlibrary_button_background else R.drawable.aboutlibrary_button_background_white
         button.background = mContext.getDrawable(drawableBG)
 
-        button.setOnClickListener(action)
+        when {
+            builder.url != null -> button.setOnClickListener { Utils.openLink(mContext, builder.url) }
+            builder.action != null -> button.setOnClickListener(builder.action)
+        }
 
         return button
     }

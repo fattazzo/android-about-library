@@ -44,6 +44,7 @@ class InfoDownloaderTask(var closure: Closure<Info?>) : AsyncTask<URL?, Void, In
     override fun doInBackground(vararg params: URL?): Info? {
 
         return try {
+            Thread.sleep(2000)
             val stream = getInputStreamFromURL(params.firstOrNull())
 
             InfoBuilder.build(stream!!)

@@ -30,10 +30,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginBottom="8dp"
     android:orientation="vertical">
 
     <android.support.v7.widget.CardView
-        android:id="@+id/projectsCardView"
+        android:id="@+id/aboutlibrary_projectsCardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="2dp">
@@ -57,7 +58,7 @@
                 android:textStyle="bold" />
 
             <LinearLayout
-                android:id="@+id/otherProjectsLayout"
+                android:id="@+id/aboutlibrary_otherProjectsLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"

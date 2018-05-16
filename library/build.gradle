@@ -40,9 +40,9 @@ dependencies {
 
     implementation "com.android.support:appcompat-v7:$buildToolsVersion"
     implementation "com.android.support:gridlayout-v7:$buildToolsVersion"
-    //implementation "com.android.support:support-v4:$buildToolsVersion"
     implementation "com.android.support:design:$buildToolsVersion"
     implementation "com.android.support:cardview-v7:$buildToolsVersion"
+    implementation "com.android.support:design:$buildToolsVersion"
 
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
 

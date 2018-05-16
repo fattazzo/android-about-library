@@ -1,6 +1,6 @@
 /*
  * Project: android-about-library
- * File: OtherProjectsView.kt
+ * File: AppBarStateChangeListener.kt
  *
  * Created by fattazzo
  * Copyright © 2018 Gianluca Fattarsi. All rights reserved.
@@ -25,36 +25,34 @@
  * SOFTWARE.
  */
 
-package com.gmail.fattazzo.aboutlibrary.view.box.projects
+package com.gmail.fattazzo.aboutlibrary.utils
 
-import android.content.Context
-import android.view.LayoutInflater
-import android.view.View
-import android.widget.LinearLayout
-import com.gmail.fattazzo.aboutlibrary.R
-import com.gmail.fattazzo.aboutlibrary.builder.AboutButtonBuilder
-import com.gmail.fattazzo.aboutlibrary.domain.Project
+import android.support.design.widget.AppBarLayout
 
-/**
- * @author fattazzo
- *         <p/>
- *         date: 11/05/18
- */
-class OtherProjectsView(private val mContext: Context, private val projects: List<Project>, private val lang: String, private val additionalProjectButtons: Map<String, List<AboutButtonBuilder>>) {
+abstract class AppBarStateChangeListener : AppBarLayout.OnOffsetChangedListener {
 
-    private var mInflater: LayoutInflater = LayoutInflater.from(mContext)
-    private var mRootView: View = mInflater.inflate(R.layout.aboutlibrary_view_other_projects, null)
+    private var mCurrentState = State.IDLE
 
-    fun create(): View {
-        val otherProjectsLayout = mRootView.findViewById<LinearLayout>(R.id.aboutlibrary_otherProjectsLayout)
-
-        projects.forEach {
-            val additionalButtons = additionalProjectButtons[it.id].orEmpty()
-
-            val projectView = ProjectView(mContext, it, lang, additionalButtons).create()
-            otherProjectsLayout.addView(projectView)
+    override fun onOffsetChanged(appBarLayout: AppBarLayout, i: Int) {
+        if (i == 0) {
+            if (mCurrentState != State.EXPANDED) {
+                onStateChanged(appBarLayout, State.EXPANDED)
+            }
+            mCurrentState = State.EXPANDED
+        } else if (Math.abs(i) >= appBarLayout.totalScrollRange) {
+            if (mCurrentState != State.COLLAPSED) {
+                onStateChanged(appBarLayout, State.COLLAPSED)
+            }
+            mCurrentState = State.COLLAPSED
+        } else {
+            if (mCurrentState != State.IDLE) {
+                onStateChanged(appBarLayout, State.IDLE)
+            }
+            mCurrentState = State.IDLE
         }
-
-        return mRootView
     }
+
+    abstract fun onStateChanged(appBarLayout: AppBarLayout, state: State)
+
+    enum class State { EXPANDED, COLLAPSED, IDLE }
 }

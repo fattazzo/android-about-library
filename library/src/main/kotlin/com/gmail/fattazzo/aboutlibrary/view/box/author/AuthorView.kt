@@ -44,9 +44,9 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.gmail.fattazzo.aboutlibrary.R
+import com.gmail.fattazzo.aboutlibrary.builder.AboutFabBuilder
 import com.gmail.fattazzo.aboutlibrary.domain.Author
 import com.gmail.fattazzo.aboutlibrary.utils.GravatarRetriver
-import com.gmail.fattazzo.aboutlibrary.view.buttons.AboutFab
 import com.squareup.picasso.Picasso
 
 
@@ -55,7 +55,7 @@ import com.squareup.picasso.Picasso
  *         <p/>
  *         date: 10/05/18
  */
-class AuthorView(private val mContext: Context, private val author: Author?, private val additionalAuthorButtons: List<AboutFab>) {
+class AuthorView(private val mContext: Context, private val author: Author?, private val additionalAuthorButtons: List<AboutFabBuilder>) {
 
     private var mInflater: LayoutInflater = LayoutInflater.from(mContext)
     private var mRootView: View = mInflater.inflate(R.layout.aboutlibrary_view_author, null)
@@ -64,24 +64,24 @@ class AuthorView(private val mContext: Context, private val author: Author?, pri
     private val mShortAnimationDuration: Long = 500
 
     fun create(): View {
-        val authorNameTV = mRootView.findViewById<TextView>(R.id.authorNameTV)
+        val authorNameTV = mRootView.findViewById<TextView>(R.id.aboutlibrary_authorNameTV)
         authorNameTV.text = author?.name.orEmpty()
 
-        val authorImageView = mRootView.findViewById<ImageView>(R.id.authorImageView)
+        val authorImageView = mRootView.findViewById<ImageView>(R.id.aboutlibrary_authorImageView)
         Picasso.get().load(GravatarRetriver.gravatarUrl(author?.email.orEmpty())).into(authorImageView)
         authorImageView.setOnClickListener { zoomImageFromThumb(authorImageView) }
 
-        val fabsLayout = mRootView.findViewById<LinearLayout>(R.id.fabsLayout)
+        val fabsLayout = mRootView.findViewById<LinearLayout>(R.id.aboutlibrary_fabsLayout)
 
         author?.email?.let {
-            val fab = AboutFab(mContext).withDrawable(R.drawable.aboutlibrary_email).withColor(R.color.aboutlibrary_email)
+            val fab = AboutFabBuilder().withDrawable(R.drawable.aboutlibrary_email).withColor(R.color.aboutlibrary_email)
                     .withAction(View.OnClickListener {
                         val intent = Intent(Intent.ACTION_SEND)
                         intent.putExtra(Intent.EXTRA_EMAIL, arrayOf(this.author.email))
                         intent.type = "message/rfc822"
                         ContextCompat.startActivity(mContext, Intent.createChooser(intent, "Choose Mail Project"), null)
                     })
-                    .create()
+                    .build(mContext)
             fabsLayout.addView(fab)
         }
 
@@ -110,40 +110,23 @@ class AuthorView(private val mContext: Context, private val author: Author?, pri
             fabsLayout.addView(fab)
         }
 
-        additionalAuthorButtons.forEach { fabsLayout.addView(it.create()) }
+        additionalAuthorButtons.forEach { fabsLayout.addView(it.build(mContext)) }
 
         return mRootView
     }
 
     private fun createOpenLinkFab(drawableResId: Int, colorResId: Int, url: String): View {
-        return AboutFab(mContext)
+        return AboutFabBuilder()
                 .withDrawable(drawableResId)
                 .withColor(colorResId)
                 .withUrl(url)
-                .create()
-    }
-
-    private fun bindEmailButton() {
-        /**
-        val emailFAB = mRootView.findViewById<FloatingActionButton>(R.id.emailFAB)
-        if (author?.email.isNullOrBlank()) {
-        emailFAB.visibility = View.GONE
-        } else {
-        emailFAB.visibility = View.VISIBLE
-        emailFAB.setOnClickListener {
-        val intent = Intent(Intent.ACTION_SEND)
-        intent.putExtra(Intent.EXTRA_EMAIL, arrayOf(this.author?.email))
-        intent.type = "message/rfc822"
-        ContextCompat.startActivity(mContext, Intent.createChooser(intent, "Choose Mail Project"), null)
-        }
-        }
-         **/
+                .build(mContext)
     }
 
     private fun zoomImageFromThumb(thumbView: ImageView) {
         mCurrentAnimator?.cancel()
 
-        val expandedImageView = mRootView.findViewById(R.id.expanded_image) as ImageView
+        val expandedImageView = mRootView.findViewById(R.id.aboutlibrary_expanded_image) as ImageView
         expandedImageView.setImageDrawable(thumbView.drawable)
 
         val startBounds = Rect()
@@ -151,7 +134,7 @@ class AuthorView(private val mContext: Context, private val author: Author?, pri
         val globalOffset = Point()
 
         thumbView.getGlobalVisibleRect(startBounds)
-        mRootView.findViewById<FrameLayout>(R.id.container).getGlobalVisibleRect(finalBounds, globalOffset)
+        mRootView.findViewById<FrameLayout>(R.id.aboutlibrary_container).getGlobalVisibleRect(finalBounds, globalOffset)
         startBounds.offset(-globalOffset.x, -globalOffset.y)
         finalBounds.offset(-globalOffset.x, -globalOffset.y)
 

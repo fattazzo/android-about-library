@@ -28,18 +28,23 @@
 package com.gmail.fattazzo.aboutlibrary.view
 
 import android.content.Context
+import android.graphics.drawable.ColorDrawable
 import android.os.Handler
-import android.support.constraint.ConstraintLayout
+import android.support.design.widget.CollapsingToolbarLayout
+import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import com.gmail.fattazzo.aboutlibrary.R
 import com.gmail.fattazzo.aboutlibrary.builder.AboutViewBuilder
 import com.gmail.fattazzo.aboutlibrary.domain.Info
 import com.gmail.fattazzo.aboutlibrary.loader.Closure
 import com.gmail.fattazzo.aboutlibrary.loader.InfoBuilder
 import com.gmail.fattazzo.aboutlibrary.loader.InfoDownloaderTask
+import com.gmail.fattazzo.aboutlibrary.utils.Utils
 import com.gmail.fattazzo.aboutlibrary.view.box.app.AppView
 import com.gmail.fattazzo.aboutlibrary.view.box.author.AuthorView
 import com.gmail.fattazzo.aboutlibrary.view.box.projects.OtherProjectsView
@@ -53,7 +58,7 @@ import java.net.URL
  *         <p/>
  *         date: 10/05/18
  */
-class AboutView(private val mContext: Context, private val builder: AboutViewBuilder) : Serializable {
+class AboutView(private val mContext: Context, private val builder: AboutViewBuilder) : Serializable, com.squareup.picasso.Callback {
 
     private lateinit var mInflater: LayoutInflater
     private lateinit var mRootView: View
@@ -61,6 +66,8 @@ class AboutView(private val mContext: Context, private val builder: AboutViewBui
 
     private lateinit var boxLayout: LinearLayout
     private var boxLayout2: LinearLayout? = null
+
+    private lateinit var aboutBgImageView: ImageView
 
     /**
      * Assemble and build the view based on the configured parameters.
@@ -112,32 +119,56 @@ class AboutView(private val mContext: Context, private val builder: AboutViewBui
             mRootView = mInflater.inflate(R.layout.aboutlibrary_view_about, null)
             mErrorView = mInflater.inflate(R.layout.aboutlibrary_view_about_error, null)
 
-            boxLayout = mRootView.findViewById(R.id.boxLayout)
-            boxLayout2 = mRootView.findViewById(R.id.boxLayout2)
+            boxLayout = mRootView.findViewById(R.id.aboutlibrary_boxLayout)
+            boxLayout2 = mRootView.findViewById(R.id.aboutlibrary_boxLayout2)
+
+            aboutBgImageView = mRootView.findViewById<ImageView>(R.id.aboutlibrary_aboutBgImageView)
 
             return when {
                 builder.info != null -> create(builder.info!!)
                 !builder.infoJsonSring.isNullOrBlank() -> create(builder.infoJsonSring!!)
                 !builder.infoUrl.isNullOrBlank() -> create(URL(builder.infoUrl))
-                else -> mErrorView
+                else -> inflateErrorView()
             }
         } catch (e: Exception) {
-            mErrorView
+            inflateErrorView()
         }
+    }
+
+    private fun inflateErrorView(): View {
+        val rootLayout = mRootView.findViewById(R.id.aboutlibrary_rootLayoutCoordinator)
+                ?: mRootView.findViewById<ViewGroup>(R.id.aboutlibrary_rootLayoutConstraint)
+        rootLayout.removeAllViews()
+        rootLayout.addView(mErrorView)
+        return mRootView
     }
 
     private fun bindView() {
         boxLayout.removeAllViews()
 
-        val aboutBgImageView = mRootView.findViewById<ImageView>(R.id.aboutBgImageView)
-        Picasso.get().load(R.drawable.aboutlibrary_background).into(aboutBgImageView)
+        val app = builder.info?.getProjectById(builder.idApp)
+        if (app?.image != null) {
+            Picasso.get().load(app.image).into(aboutBgImageView, this)
+        } else {
+            Picasso.get().load(R.drawable.aboutlibrary_background).into(aboutBgImageView, this)
+        }
+
+        if (app != null) {
+            val i18n = app.getI18n(builder.lang) ?: app.getI18n()
+
+            val collapsingToolbarLayout = mRootView.findViewById<CollapsingToolbarLayout>(R.id.aboutlibrary_collapsingToolbarLayout)
+            collapsingToolbarLayout.title = i18n?.title ?: "About"
+
+            Picasso.get().load(app.icon).into(mRootView.findViewById<ImageView>(R.id.aboutlibrary_aboutAppImageView))
+
+        }
 
         if (builder.info != null) {
             buildAppBox()
             buildAuthorBox()
             buildOtherProjectsBox()
         } else {
-            boxLayout.addView(mErrorView)
+            inflateErrorView()
         }
     }
 
@@ -173,7 +204,7 @@ class AboutView(private val mContext: Context, private val builder: AboutViewBui
     }
 
     private fun loadInfo(json: String) {
-        val loadingLayout = mRootView.findViewById<ConstraintLayout>(R.id.loadingLayout)
+        val loadingLayout = mRootView.findViewById<RelativeLayout>(R.id.aboutlibrary_loadingLayout)
         loadingLayout.visibility = View.VISIBLE
 
         val info: Info? = try {
@@ -188,7 +219,7 @@ class AboutView(private val mContext: Context, private val builder: AboutViewBui
     }
 
     private fun loadInfo(url: URL) {
-        val loadingLayout = mRootView.findViewById<ConstraintLayout>(R.id.loadingLayout)
+        val loadingLayout = mRootView.findViewById<RelativeLayout>(R.id.aboutlibrary_loadingLayout)
         loadingLayout.visibility = View.VISIBLE
 
         InfoDownloaderTask(object : Closure<Info?> {
@@ -205,4 +236,17 @@ class AboutView(private val mContext: Context, private val builder: AboutViewBui
             }
         }).execute(url)
     }
+
+    // App image listener --------------------------------------
+
+    override fun onSuccess() {
+        val collapsingToolbarLayout = mRootView.findViewById<CollapsingToolbarLayout>(R.id.aboutlibrary_collapsingToolbarLayout)
+        collapsingToolbarLayout.contentScrim = ColorDrawable(Utils.getDominantColor(aboutBgImageView.drawable))
+    }
+
+    override fun onError(e: java.lang.Exception?) {
+        val collapsingToolbarLayout = mRootView.findViewById<CollapsingToolbarLayout>(R.id.aboutlibrary_collapsingToolbarLayout)
+        collapsingToolbarLayout.contentScrim = ColorDrawable(ContextCompat.getColor(mContext, R.color.aboutlibrary_background_image_error))
+    }
+
 }

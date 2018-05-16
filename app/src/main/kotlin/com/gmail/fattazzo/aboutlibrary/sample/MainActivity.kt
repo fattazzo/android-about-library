@@ -27,26 +27,26 @@
 
 package com.gmail.fattazzo.aboutlibrary.sample
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
-import android.view.View
-import android.widget.*
+import android.widget.ArrayAdapter
+import android.widget.CheckBox
+import android.widget.Spinner
+import com.gmail.fattazzo.aboutlibrary.activity.AboutActivity
 import com.gmail.fattazzo.aboutlibrary.builder.AboutViewBuilder
 import com.gmail.fattazzo.aboutlibrary.domain.Author
 import com.gmail.fattazzo.aboutlibrary.domain.I18n
 import com.gmail.fattazzo.aboutlibrary.domain.Info
 import com.gmail.fattazzo.aboutlibrary.domain.Project
-import org.androidannotations.annotations.*
+import org.androidannotations.annotations.AfterViews
+import org.androidannotations.annotations.Click
+import org.androidannotations.annotations.EActivity
+import org.androidannotations.annotations.ViewById
 import org.androidannotations.annotations.res.StringArrayRes
 
 
 @EActivity(R.layout.activity_main)
 open class MainActivity : AppCompatActivity() {
-
-    @ViewById
-    internal lateinit var aboutLayout: LinearLayout
-
-    @ViewById
-    internal lateinit var paramsLayout: ScrollView
 
     @ViewById
     internal lateinit var appCheckBox: CheckBox
@@ -66,18 +66,17 @@ open class MainActivity : AppCompatActivity() {
     @ViewById
     internal lateinit var appSpinner: Spinner
 
+    @ViewById
+    internal lateinit var errorViewCheckBox: CheckBox
+
     @StringArrayRes(R.array.projects_list_description)
     internal lateinit var projectsDescArrayRes: Array<String>
     @StringArrayRes(R.array.projects_list_id)
     internal lateinit var projectsIdArrayRes: Array<String>
 
-    @JvmField
-    @InstanceState
-    var aboutViewBuilder: AboutViewBuilder? = null
-
-
     @AfterViews
     fun initViews() {
+
         val langAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, langDesArrayRes)
         langAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         langSpinner.adapter = langAdapter
@@ -85,55 +84,44 @@ open class MainActivity : AppCompatActivity() {
         val appAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, projectsDescArrayRes)
         appAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         appSpinner.adapter = appAdapter
-
-        if (aboutViewBuilder != null) {
-            loadButtonClicked()
-        } else {
-            aboutLayout.visibility = View.GONE
-            paramsLayout.visibility = View.VISIBLE
-        }
     }
 
     @Click
     fun loadButtonClicked() {
-        paramsLayout.visibility = View.GONE
-
-        aboutLayout.visibility = View.VISIBLE
-        aboutLayout.removeAllViews()
-
-        if (aboutViewBuilder == null) {
-            aboutViewBuilder = AboutViewBuilder()
-                    // ------------- Info --------------------------
-                    //.withInfoUrl("https://gist.githubusercontent.com/fattazzo/d6aa41128c39b4882c0b6bd232984cfb/raw")
-                    .withInfo(createInfoSample())
-                    // ------------- Main params -------------------
-                    .withAppId(projectsIdArrayRes[appSpinner.selectedItemPosition])
-                    .withLang(langCodeArrayRes[langSpinner.selectedItemPosition])
-                    // ------------- About this app section --------
-                    .withAppBox(appCheckBox.isChecked)
-                    // ------------- Author section ----------------
-                    .withAuthorBox(authorCheckBox.isChecked)
-                    // ------------- Other projects section --------
-                    .withOtherProjectsBox(otherProjectsCheckBox.isChecked)
-                    .withExcludeThisAppFromProjects(true)
+        var aboutViewBuilder = if (errorViewCheckBox.isChecked) {
+            AboutViewBuilder().withInfoUrl("wrong url")
+        } else {
+            AboutViewBuilder().withInfo(createInfoSample())
         }
 
-        aboutLayout.addView(aboutViewBuilder!!.build(this))
+        aboutViewBuilder = aboutViewBuilder!!
+                // ------------- Main params -------------------
+                .withAppId(projectsIdArrayRes[appSpinner.selectedItemPosition])
+                .withLang(langCodeArrayRes[langSpinner.selectedItemPosition])
+                // ------------- About this app section --------
+                .withAppBox(appCheckBox.isChecked)
+                // ------------- Author section ----------------
+                .withAuthorBox(authorCheckBox.isChecked)
+                // ------------- Other projects section --------
+                .withOtherProjectsBox(otherProjectsCheckBox.isChecked)
+                .withExcludeThisAppFromProjects(false)
+
+        val intent = Intent(this, AboutActivity::class.java)
+                .apply { putExtra(AboutActivity.EXTRA_BUILDER, aboutViewBuilder) }
+        startActivity(intent)
     }
 
     @Click
     fun resetButtonClicked() {
-        aboutViewBuilder = null
-
-        aboutLayout.visibility = View.GONE
-        aboutLayout.removeAllViews()
-
-        paramsLayout.visibility = View.VISIBLE
 
         appCheckBox.isChecked = true
         authorCheckBox.isChecked = true
         otherProjectsCheckBox.isChecked = true
         langSpinner.setSelection(0)
+
+        appSpinner.setSelection(0)
+
+        errorViewCheckBox.isChecked = false
     }
 
     private fun createInfoSample(): Info {
@@ -151,6 +139,7 @@ open class MainActivity : AppCompatActivity() {
             icon = "https://lh5.ggpht.com/a9f5u65dd-GgFGbLaDO5XauCNcjtJqOkSDqR_xDJ9vbT4MqutzLz0dfsWBtGBH2Ij6sq=h150"
             playStoreUrl = "https://play.google.com/store/apps/details?id=com.gmail.fattazzo.meteo"
             githubUrl = "https://github.com/fattazzo/meteo"
+            image = "https://lh5.ggpht.com/xpKYeB9Nmbv2ZLDLPJT52hIpVoAAbPLAm-_jCPSTuFutNynZ6WYujmkWXcFiQjcQTRk=h250"
             i18n = listOf(I18n().apply {
                 lang = "default"
                 title = "Weather of Trentino"
@@ -168,6 +157,7 @@ open class MainActivity : AppCompatActivity() {
             playStoreUrl = "https://play.google.com/store/apps/details?id=com.gmail.fattazzo.formula1world"
             githubUrl = "https://github.com/fattazzo/total-gp-world"
             wikiUrl = "https://github.com/fattazzo/total-gp-world/wiki"
+            image = "https://lh3.googleusercontent.com/-x9tE1XBxqvwgKc6G6Syq1jU_gzkdMYaFWFyyuW4xT-lhOJdoaBBaZyOzeshn-WD9mQ=h250"
             i18n = listOf(I18n().apply {
                 lang = "default"
                 title = "Total GP world"

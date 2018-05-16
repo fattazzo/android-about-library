@@ -31,8 +31,6 @@ import android.content.Context
 import android.view.View
 import com.gmail.fattazzo.aboutlibrary.domain.Info
 import com.gmail.fattazzo.aboutlibrary.view.AboutView
-import com.gmail.fattazzo.aboutlibrary.view.buttons.AboutButton
-import com.gmail.fattazzo.aboutlibrary.view.buttons.AboutFab
 import java.io.Serializable
 
 /**
@@ -59,24 +57,24 @@ class AboutViewBuilder : Serializable {
     // -------------------- About this app section -------
     var appBox = true
         private set
-    var additionalAppButtons = listOf<AboutButton>()
+    var additionalAppButtons = listOf<AboutButtonBuilder>()
         private set
 
     // -------------------- Author section ---------------
     var authorBox = true
         private set
-    var additionalAuthorButtons = listOf<AboutFab>()
+    var additionalAuthorButtons = listOf<AboutFabBuilder>()
         private set
 
     // -------------------- Other projects section -------
     var otherProjectsBox = true
         private set
-    var additionalProjectButtons = mutableMapOf<String, List<AboutButton>>()
+    var additionalProjectButtons = mutableMapOf<String, List<AboutButtonBuilder>>()
         private set
     var excludeThisAppFromProjects = false
         private set
 
-    fun withAdditionalAuthorButtons(buttons: List<AboutFab>): AboutViewBuilder {
+    fun withAdditionalAuthorButtons(buttons: List<AboutFabBuilder>): AboutViewBuilder {
         this.additionalAuthorButtons = buttons
         return this
     }
@@ -86,12 +84,12 @@ class AboutViewBuilder : Serializable {
         return this
     }
 
-    fun withAdditionalAppButtons(buttons: List<AboutButton>): AboutViewBuilder {
+    fun withAdditionalAppButtons(buttons: List<AboutButtonBuilder>): AboutViewBuilder {
         this.additionalAppButtons = buttons
         return this
     }
 
-    fun withAdditionalProjectButtons(appId: String, buttons: List<AboutButton>): AboutViewBuilder {
+    fun withAdditionalProjectButtons(appId: String, buttons: List<AboutButtonBuilder>): AboutViewBuilder {
         this.additionalProjectButtons[appId] = buttons
         return this
     }
@@ -137,6 +135,6 @@ class AboutViewBuilder : Serializable {
     }
 
     fun build(context: Context): View {
-        return AboutView(context,this).create()
+        return AboutView(context, this).create()
     }
 }

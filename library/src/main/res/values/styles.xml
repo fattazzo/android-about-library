@@ -1,6 +1,6 @@
 <resources>
 
-    <style name="AppThemeAndroidLibrary" parent="Theme.AppCompat.Light" />
+    <style name="AndroidLibraryAppThemeAndroidLibrary" parent="Theme.AppCompat.Light.NoActionBar" />
 
     <style name="AndroidLibraryTextAppearance" parent="@android:style/TextAppearance" />
 
@@ -20,13 +20,16 @@
         <item name="android:textSize">@dimen/aboutlibrary_font_size_big</item>
     </style>
 
-    <style name="AndroidLibraryCollapsingTextAppearance" parent="Base.TextAppearance.AppCompat.Widget.ActionBar.Title" />
+    <style name="AndroidLibraryCollapsingTextAppearance" parent="Base.TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textSize">@dimen/aboutlibrary_font_size_large</item>
+        <item name="android:textColor">@color/aboutlibrary_white</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 
     <style name="AndroidLibraryCollapsingTextAppearance.Inverse">
         <item name="android:textSize">@dimen/aboutlibrary_font_size_large</item>
         <item name="android:textColor">@color/aboutlibrary_black</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:textAllCaps">true</item>
     </style>
 
 </resources>

@@ -11,4 +11,6 @@
     <string name="language">Language</string>
 
     <string name="app_of_about">App</string>
+
+    <string name="show_error_view">Show error view</string>
 </resources>

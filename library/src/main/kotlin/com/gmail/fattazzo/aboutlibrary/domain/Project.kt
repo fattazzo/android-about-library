@@ -47,6 +47,10 @@ class Project : Serializable {
     @Expose
     lateinit var icon: String
 
+    @SerializedName("image")
+    @Expose
+    var image: String? = null
+
     @SerializedName("playStoreUrl")
     @Expose
     var playStoreUrl: String? = null

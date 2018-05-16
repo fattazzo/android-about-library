@@ -2,7 +2,7 @@
 
     <color name="aboutlibrary_black_overlay">#66000000</color>
 
-    <color name="aboutlibrary_background">#d3f2f0f0</color>
+    <color name="aboutlibrary_background">#f2f0f0</color>
 
     <color name="aboutlibrary_email">#75b448</color>
     <color name="aboutlibrary_website">#ed7d14</color>
@@ -13,6 +13,11 @@
     <color name="aboutlibrary_linkedin">#0077B5</color>
     <color name="aboutlibrary_playstore">#607D8B</color>
 
+    <color name="aboutlibrary_white">#FFFFFFFF</color>
     <color name="aboutlibrary_black">#000000</color>
     <color name="aboutlibrary_light_gray">#efebea</color>
+
+    <color name="aboutlibrary_black_transparent">#7b000000</color>
+
+    <color name="aboutlibrary_background_image_error">#7b7b7b</color>
 </resources>

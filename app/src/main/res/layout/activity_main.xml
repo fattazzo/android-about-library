@@ -28,26 +28,12 @@
   ~
   -->
 
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:project="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-
-    <LinearLayout
-        android:id="@+id/aboutLayout"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:orientation="vertical"
-        project:layout_constraintBottom_toTopOf="@+id/loadButton"
-        project:layout_constraintEnd_toEndOf="parent"
-        project:layout_constraintStart_toStartOf="parent"
-        project:layout_constraintTop_toTopOf="parent"
-        tools:visibility="gone"></LinearLayout>
 
     <ScrollView
         android:id="@+id/paramsLayout"
@@ -56,10 +42,10 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        project:layout_constraintBottom_toTopOf="@+id/loadButton"
-        project:layout_constraintEnd_toEndOf="parent"
-        project:layout_constraintStart_toStartOf="parent"
-        project:layout_constraintTop_toTopOf="parent">
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_above="@+id/buttonsLayout">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -110,38 +96,56 @@
                 android:id="@+id/appSpinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+
+            <CheckBox
+                android:id="@+id/errorViewCheckBox"
+                android:text="@string/show_error_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:layout_editor_absoluteX="120dp"
+                tools:layout_editor_absoluteY="254dp" />
         </LinearLayout>
     </ScrollView>
 
-    <Button
-        android:id="@+id/loadButton"
-        android:layout_width="0dp"
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/buttonsLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginStart="8dp"
-        android:text="@string/show"
-        project:layout_constraintBottom_toBottomOf="parent"
-        project:layout_constraintEnd_toStartOf="@+id/guideline"
-        project:layout_constraintStart_toStartOf="parent" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true">
 
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        project:layout_constraintGuide_percent="0.5" />
+        <Button
+            android:id="@+id/loadButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginStart="8dp"
+            android:text="@string/show"
+            project:layout_constraintBottom_toBottomOf="parent"
+            project:layout_constraintEnd_toStartOf="@+id/guideline"
+            project:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/resetButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="4dp"
-        android:text="@string/reset"
-        project:layout_constraintBottom_toBottomOf="parent"
-        project:layout_constraintEnd_toEndOf="parent"
-        project:layout_constraintStart_toStartOf="@+id/guideline" />
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            project:layout_constraintGuide_percent="0.5" />
 
-</android.support.constraint.ConstraintLayout>
+        <Button
+            android:id="@+id/resetButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="4dp"
+            android:text="@string/reset"
+            project:layout_constraintBottom_toBottomOf="parent"
+            project:layout_constraintEnd_toEndOf="parent"
+            project:layout_constraintStart_toStartOf="@+id/guideline" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</RelativeLayout>

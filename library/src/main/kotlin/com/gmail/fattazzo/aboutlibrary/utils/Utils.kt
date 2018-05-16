@@ -29,7 +29,13 @@ package com.gmail.fattazzo.aboutlibrary.utils
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
 import android.net.Uri
+
 
 /**
  * @author fattazzo
@@ -50,5 +56,47 @@ object Utils {
             i.data = Uri.parse(it)
             context.startActivity(i)
         }
+    }
+
+    private fun drawableToBitmap(drawable: Drawable?): Bitmap? {
+        if (drawable == null) {
+            return null
+        }
+
+        if (drawable is BitmapDrawable) {
+            return drawable.bitmap
+        }
+
+        val width = if (!drawable.bounds.isEmpty)
+            drawable.bounds.width()
+        else
+            drawable.intrinsicWidth
+
+        val height = if (!drawable.bounds.isEmpty)
+            drawable.bounds.height()
+        else
+            drawable.intrinsicHeight
+
+        // Now we check we are > 0
+        val bitmap = Bitmap.createBitmap(if (width <= 0) 1 else width, if (height <= 0) 1 else height,
+                Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(bitmap)
+        drawable.setBounds(0, 0, canvas.width, canvas.height)
+        drawable.draw(canvas)
+
+        return bitmap
+    }
+
+    fun getDominantColor(drawable: Drawable?): Int {
+        val bitmap = drawableToBitmap(drawable) ?: return Color.BLACK
+
+        val newBitmap = Bitmap.createScaledBitmap(bitmap, 1, 1, true)
+        val color = newBitmap.getPixel(0, 0)
+        newBitmap.recycle()
+
+        val red = Color.red(color)
+        val blue = Color.blue(color)
+        val green = Color.green(color)
+        return Color.argb(255, red, green, blue)
     }
 }

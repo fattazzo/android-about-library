@@ -1,6 +1,6 @@
 /*
  * Project: android-about-library
- * File: OtherProjectsView.kt
+ * File: AboutFabBuilder.kt
  *
  * Created by fattazzo
  * Copyright © 2018 Gianluca Fattarsi. All rights reserved.
@@ -25,36 +25,52 @@
  * SOFTWARE.
  */
 
-package com.gmail.fattazzo.aboutlibrary.view.box.projects
+package com.gmail.fattazzo.aboutlibrary.builder
 
 import android.content.Context
-import android.view.LayoutInflater
 import android.view.View
-import android.widget.LinearLayout
 import com.gmail.fattazzo.aboutlibrary.R
-import com.gmail.fattazzo.aboutlibrary.builder.AboutButtonBuilder
-import com.gmail.fattazzo.aboutlibrary.domain.Project
+import com.gmail.fattazzo.aboutlibrary.view.buttons.AboutFab
+import java.io.Serializable
 
 /**
  * @author fattazzo
  *         <p/>
- *         date: 11/05/18
+ *         date: 16/05/18
  */
-class OtherProjectsView(private val mContext: Context, private val projects: List<Project>, private val lang: String, private val additionalProjectButtons: Map<String, List<AboutButtonBuilder>>) {
+class AboutFabBuilder : Serializable {
 
-    private var mInflater: LayoutInflater = LayoutInflater.from(mContext)
-    private var mRootView: View = mInflater.inflate(R.layout.aboutlibrary_view_other_projects, null)
+    var drawableResId: Int? = null
+        private set
 
-    fun create(): View {
-        val otherProjectsLayout = mRootView.findViewById<LinearLayout>(R.id.aboutlibrary_otherProjectsLayout)
+    var action: View.OnClickListener? = null
+        private set
 
-        projects.forEach {
-            val additionalButtons = additionalProjectButtons[it.id].orEmpty()
+    var url: String? = null
+        private set
 
-            val projectView = ProjectView(mContext, it, lang, additionalButtons).create()
-            otherProjectsLayout.addView(projectView)
-        }
+    var color: Int = R.color.aboutlibrary_light_gray
+        private set
 
-        return mRootView
+    fun withColor(color: Int): AboutFabBuilder {
+        this.color = color
+        return this
     }
+
+    fun withUrl(url: String): AboutFabBuilder {
+        this.url = url
+        return this
+    }
+
+    fun withAction(action: View.OnClickListener): AboutFabBuilder {
+        this.action = action
+        return this
+    }
+
+    fun withDrawable(drawableResId: Int): AboutFabBuilder {
+        this.drawableResId = drawableResId
+        return this
+    }
+
+    fun build(context: Context): View = AboutFab(context, this).create()
 }

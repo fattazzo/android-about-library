@@ -29,6 +29,7 @@ package com.gmail.fattazzo.aboutlibrary.view.box.app
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Paint
 import android.net.Uri
 import android.support.v7.widget.GridLayout
 import android.view.LayoutInflater
@@ -36,8 +37,8 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import com.gmail.fattazzo.aboutlibrary.R
+import com.gmail.fattazzo.aboutlibrary.builder.AboutButtonBuilder
 import com.gmail.fattazzo.aboutlibrary.domain.Project
-import com.gmail.fattazzo.aboutlibrary.view.buttons.AboutButton
 import com.squareup.picasso.Picasso
 
 
@@ -46,7 +47,7 @@ import com.squareup.picasso.Picasso
  *         <p/>
  *         date: 10/05/18
  */
-class AppView(private val mContext: Context, private val project: Project, private val lang: String, private val additionalAppButtons: List<AboutButton>) {
+class AppView(private val mContext: Context, private val project: Project, private val lang: String, private val additionalAppButtons: List<AboutButtonBuilder>) {
 
     private var mInflater: LayoutInflater = LayoutInflater.from(mContext)
     private var mRootView: View = mInflater.inflate(R.layout.aboutlibrary_view_app, null)
@@ -54,8 +55,10 @@ class AppView(private val mContext: Context, private val project: Project, priva
     fun create(): View {
         val i18n = project.getI18n(lang) ?: project.getI18n()
 
-        val titleTV = mRootView.findViewById<TextView>(R.id.appTitleTV)
-        titleTV.text = i18n?.title.orEmpty()
+        mRootView.findViewById<TextView>(R.id.appTitleTV).text = i18n?.title.orEmpty()
+        mRootView.findViewById<TextView>(R.id.appTitleShadowTV).text = i18n?.title.orEmpty()
+        mRootView.findViewById<TextView>(R.id.appTitleShadowTV).paint.strokeWidth = 5f
+        mRootView.findViewById<TextView>(R.id.appTitleShadowTV).paint.style = Paint.Style.STROKE
 
         val appIconView = mRootView.findViewById<ImageView>(R.id.appIconView)
         if (project.icon.isNotBlank())
@@ -71,41 +74,41 @@ class AppView(private val mContext: Context, private val project: Project, priva
 
         val buttons = mutableListOf<View>()
         project.playStoreUrl?.let {
-            buttons.add(AboutButton(mContext)
+            buttons.add(AboutButtonBuilder()
                     .withText(R.string.aboutlibrary_play_store)
                     .withDrawable(R.drawable.aboutlibrary_googleplay)
                     .withUrl(it)
-                    .create())
+                    .build(mContext))
         }
 
         project.githubUrl?.let {
-            buttons.add(AboutButton(mContext)
+            buttons.add(AboutButtonBuilder()
                     .withText(R.string.aboutlibrary_github_project)
                     .withDrawable(R.drawable.aboutlibrary_github)
                     .withUrl(it)
-                    .create())
+                    .build(mContext))
         }
 
         project.websiteUrl?.let {
-            buttons.add(AboutButton(mContext)
+            buttons.add(AboutButtonBuilder()
                     .withText(R.string.aboutlibrary_website)
                     .withDrawable(R.drawable.aboutlibrary_website)
                     .withUrl(it)
-                    .create())
+                    .build(mContext))
         }
 
         project.wikiUrl?.let {
-            buttons.add(AboutButton(mContext)
+            buttons.add(AboutButtonBuilder()
                     .withText(R.string.aboutlibrary_wiki)
                     .withDrawable(R.drawable.aboutlibrary_wiki)
                     .withUrl(it)
-                    .create())
+                    .build(mContext))
         }
 
         val rateItButton = buildRateItButton()
         rateItButton?.let { buttons.add(it) }
 
-        additionalAppButtons.forEach { buttons.add(it.create()) }
+        additionalAppButtons.forEach { buttons.add(it.build(mContext)) }
 
         val columns = mContext.resources.getInteger(R.integer.aboutlibrary_app_button_columns)
         val row = buttons.size / columns
@@ -137,11 +140,11 @@ class AppView(private val mContext: Context, private val project: Project, priva
         return project.playStoreUrl?.let {
             val rateItUrl = "market://details?id=${it.substringAfter("id=")}"
 
-            AboutButton(mContext)
+            AboutButtonBuilder()
                     .withText(R.string.aboutlibrary_rate_it)
                     .withDrawable(R.drawable.aboutlibrary_star)
                     .withAction(View.OnClickListener { mContext.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(rateItUrl))) })
-                    .create()
+                    .build(mContext)
         }
     }
 }

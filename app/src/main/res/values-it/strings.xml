@@ -12,4 +12,6 @@
     <string name="language">Lingua</string>
 
     <string name="app_of_about">App</string>
+
+    <string name="show_error_view">Visualizza la vista di errore</string>
 </resources>

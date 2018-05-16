@@ -48,7 +48,24 @@
             project:layout_constraintEnd_toEndOf="parent"
             project:layout_constraintStart_toStartOf="parent"
             project:layout_constraintTop_toTopOf="parent"
+            android:visibility="gone"
             project:srcCompat="@android:drawable/btn_star_big_on" />
+
+        <TextView
+            android:id="@+id/appTitleShadowTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="2dp"
+            android:textAllCaps="true"
+            android:textAppearance="@style/AndroidLibraryTextAppearance.Large"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            project:layout_constraintEnd_toEndOf="parent"
+            project:layout_constraintStart_toStartOf="parent"
+            project:layout_constraintTop_toBottomOf="@+id/appIconView"
+            android:visibility="gone"/>
 
         <TextView
             android:id="@+id/appTitleTV"
@@ -62,7 +79,8 @@
             android:textStyle="bold"
             project:layout_constraintEnd_toEndOf="parent"
             project:layout_constraintStart_toStartOf="parent"
-            project:layout_constraintTop_toBottomOf="@+id/appIconView" />
+            project:layout_constraintTop_toBottomOf="@+id/appIconView"
+            android:visibility="gone"/>
 
         <android.support.v7.widget.GridLayout
             android:id="@+id/buttonLayout"

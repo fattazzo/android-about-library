@@ -34,8 +34,8 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import com.gmail.fattazzo.aboutlibrary.R
+import com.gmail.fattazzo.aboutlibrary.builder.AboutButtonBuilder
 import com.gmail.fattazzo.aboutlibrary.domain.Project
-import com.gmail.fattazzo.aboutlibrary.view.buttons.AboutButton
 import com.squareup.picasso.Picasso
 
 /**
@@ -43,7 +43,7 @@ import com.squareup.picasso.Picasso
  *         <p/>
  *         date: 11/05/18
  */
-class ProjectView(private val mContext: Context, private val project: Project, private val lang: String, private val additionalButtons: List<AboutButton>) {
+class ProjectView(private val mContext: Context, private val project: Project, private val lang: String, private val additionalButtons: List<AboutButtonBuilder>) {
 
     private var mInflater: LayoutInflater = LayoutInflater.from(mContext)
     private var mRootView: View = mInflater.inflate(R.layout.aboutlibrary_view_project, null)
@@ -51,14 +51,14 @@ class ProjectView(private val mContext: Context, private val project: Project, p
     fun create(): View {
         val i18n = project.getI18n(lang) ?: project.getI18n()
 
-        val iconImageView = mRootView.findViewById<ImageView>(R.id.iconImageView)
+        val iconImageView = mRootView.findViewById<ImageView>(R.id.aboutlibrary_iconImageView)
         if (project.icon.isNotBlank())
             Picasso.get().load(project.icon).into(iconImageView)
 
-        mRootView.findViewById<TextView>(R.id.titleTV).text = i18n?.title
-        mRootView.findViewById<TextView>(R.id.descriptionTV).text = i18n?.description
+        mRootView.findViewById<TextView>(R.id.aboutlibrary_titleTV).text = i18n?.title
+        mRootView.findViewById<TextView>(R.id.aboutlibrary_descriptionTV).text = i18n?.description
 
-        val projectsLayout = mRootView.findViewById<GridLayout>(R.id.projectsLayout)
+        val projectsLayout = mRootView.findViewById<GridLayout>(R.id.aboutlibrary_projectsLayout)
         val buttons = buildProjectButtons(project)
 
         val columns = mContext.resources.getInteger(R.integer.aboutlibrary_app_button_columns)
@@ -104,18 +104,18 @@ class ProjectView(private val mContext: Context, private val project: Project, p
         project.websiteUrl?.let {
             buttons.add(buildButton(R.string.aboutlibrary_website, R.color.aboutlibrary_website, R.drawable.aboutlibrary_website, it))
         }
-        additionalButtons.forEach { buttons.add(it.create()) }
+        additionalButtons.forEach { buttons.add(it.build(mContext)) }
 
         return buttons
     }
 
     private fun buildButton(textResId: Int, textColor: Int, drawableResId: Int, urlToOpen: String): View {
-        return AboutButton(mContext)
+        return AboutButtonBuilder()
                 .withText(textResId)
                 .withTextColor(textColor)
                 .withDrawable(drawableResId)
                 .withBackgroundDark()
                 .withUrl(urlToOpen)
-                .create()
+                .build(mContext)
     }
 }

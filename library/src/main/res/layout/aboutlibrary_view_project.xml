@@ -39,17 +39,17 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/iconImageView"
+            android:id="@+id/aboutlibrary_iconImageView"
             android:layout_width="@dimen/aboutlibrary_app_icon_size"
             android:layout_height="@dimen/aboutlibrary_app_icon_size"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="8dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view"
             app:srcCompat="@drawable/aboutlibrary_project" />
 
         <TextView
-            android:id="@+id/titleTV"
+            android:id="@+id/aboutlibrary_titleTV"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
@@ -59,13 +59,13 @@
             android:textAllCaps="true"
             android:textAppearance="@style/AndroidLibraryTextAppearance.Medium"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/iconImageView"
+            app:layout_constraintBottom_toBottomOf="@+id/aboutlibrary_iconImageView"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/iconImageView"
-            app:layout_constraintTop_toTopOf="@+id/iconImageView" />
+            app:layout_constraintStart_toEndOf="@+id/aboutlibrary_iconImageView"
+            app:layout_constraintTop_toTopOf="@+id/aboutlibrary_iconImageView" />
 
         <TextView
-            android:id="@+id/descriptionTV"
+            android:id="@+id/aboutlibrary_descriptionTV"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
@@ -73,16 +73,16 @@
             android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/iconImageView" />
+            app:layout_constraintTop_toBottomOf="@+id/aboutlibrary_iconImageView" />
 
         <android.support.v7.widget.GridLayout
-            android:id="@+id/projectsLayout"
+            android:id="@+id/aboutlibrary_projectsLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/descriptionTV" />
+            app:layout_constraintTop_toBottomOf="@+id/aboutlibrary_descriptionTV" />
 
         <View
             android:id="@+id/view"

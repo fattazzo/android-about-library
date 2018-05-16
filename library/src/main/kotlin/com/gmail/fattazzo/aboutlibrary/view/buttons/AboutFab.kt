@@ -29,14 +29,14 @@ package com.gmail.fattazzo.aboutlibrary.view.buttons
 
 import android.content.Context
 import android.content.res.ColorStateList
-import android.graphics.drawable.Drawable
 import android.support.design.widget.FloatingActionButton
 import android.support.v4.content.ContextCompat
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import com.gmail.fattazzo.aboutlibrary.R
+import com.gmail.fattazzo.aboutlibrary.builder.AboutFabBuilder
 import com.gmail.fattazzo.aboutlibrary.utils.Utils
+import java.io.Serializable
 
 
 /**
@@ -44,44 +44,22 @@ import com.gmail.fattazzo.aboutlibrary.utils.Utils
  *         <p/>
  *         date: 14/05/18
  */
-class AboutFab(private val mContext: Context) {
-
-    private var drawable: Drawable? = null
-
-    private var action: View.OnClickListener? = null
-
-    private var color: Int = R.color.aboutlibrary_light_gray
-
-    fun withColor(color: Int): AboutFab {
-        this.color = color
-        return this
-    }
-
-    fun withUrl(url: String): AboutFab {
-        this.action = View.OnClickListener { Utils.openLink(mContext, url) }
-        return this
-    }
-
-    fun withAction(action: View.OnClickListener): AboutFab {
-        this.action = action
-        return this
-    }
-
-    fun withDrawable(drawableResId: Int): AboutFab {
-        this.drawable = mContext.getDrawable(drawableResId)
-        return this
-    }
-
-    fun withDrawable(drawable: Drawable): AboutFab {
-        this.drawable = drawable
-        return this
-    }
+class AboutFab(private val mContext: Context, private val builder: AboutFabBuilder) : Serializable {
 
     fun create(): View {
         val fab = FloatingActionButton(mContext)
-        fab.setImageDrawable(drawable)
-        fab.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(mContext, color))
-        fab.setOnClickListener(action)
+
+        if (builder.drawableResId != null) {
+            fab.setImageDrawable(ContextCompat.getDrawable(mContext, builder.drawableResId!!))
+        }
+
+        fab.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(mContext, builder.color))
+
+        when {
+            builder.url != null -> fab.setOnClickListener { Utils.openLink(mContext, builder.url) }
+            builder.action != null -> fab.setOnClickListener(builder.action)
+        }
+
         fab.size = FloatingActionButton.SIZE_MINI
 
         val params = LinearLayout.LayoutParams(ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT))
