@@ -28,13 +28,14 @@
 package com.gmail.fattazzo.aboutlibrary.builder
 
 import android.content.Context
+import java.io.Serializable
 
 /**
  * @author fattazzo
  *         <p/>
  *         date: 17/05/18
  */
-interface Action {
+interface Action : Serializable {
 
     fun run(context: Context)
 }
