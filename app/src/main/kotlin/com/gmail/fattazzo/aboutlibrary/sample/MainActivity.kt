@@ -48,6 +48,15 @@ import org.androidannotations.annotations.res.StringArrayRes
 @EActivity(R.layout.activity_main)
 open class MainActivity : AppCompatActivity() {
 
+    // Main params
+    @ViewById
+    internal lateinit var langSpinner: Spinner
+    @ViewById
+    internal lateinit var appSpinner: Spinner
+    @ViewById
+    internal lateinit var flatButtonsCheckBox: CheckBox
+
+    // Section
     @ViewById
     internal lateinit var appCheckBox: CheckBox
     @ViewById
@@ -55,19 +64,14 @@ open class MainActivity : AppCompatActivity() {
     @ViewById
     internal lateinit var otherProjectsCheckBox: CheckBox
 
+    // Others
     @ViewById
-    internal lateinit var langSpinner: Spinner
+    internal lateinit var errorViewCheckBox: CheckBox
 
     @StringArrayRes(R.array.lang_description)
     internal lateinit var langDesArrayRes: Array<String>
     @StringArrayRes(R.array.lang_code)
     internal lateinit var langCodeArrayRes: Array<String>
-
-    @ViewById
-    internal lateinit var appSpinner: Spinner
-
-    @ViewById
-    internal lateinit var errorViewCheckBox: CheckBox
 
     @StringArrayRes(R.array.projects_list_description)
     internal lateinit var projectsDescArrayRes: Array<String>
@@ -98,6 +102,7 @@ open class MainActivity : AppCompatActivity() {
                 // ------------- Main params -------------------
                 .withAppId(projectsIdArrayRes[appSpinner.selectedItemPosition])
                 .withLang(langCodeArrayRes[langSpinner.selectedItemPosition])
+                .withFlatStyleButtons(flatButtonsCheckBox.isChecked)
                 // ------------- About this app section --------
                 .withAppBox(appCheckBox.isChecked)
                 // ------------- Author section ----------------
@@ -114,12 +119,13 @@ open class MainActivity : AppCompatActivity() {
     @Click
     fun resetButtonClicked() {
 
+        langSpinner.setSelection(0)
+        appSpinner.setSelection(0)
+        flatButtonsCheckBox.isChecked = false
+
         appCheckBox.isChecked = true
         authorCheckBox.isChecked = true
         otherProjectsCheckBox.isChecked = true
-        langSpinner.setSelection(0)
-
-        appSpinner.setSelection(0)
 
         errorViewCheckBox.isChecked = false
     }

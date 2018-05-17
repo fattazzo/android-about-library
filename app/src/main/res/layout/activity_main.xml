@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~
   ~ Project: android-about-library
   ~ File: activity_main.xml
@@ -39,39 +38,33 @@
         android:id="@+id/paramsLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_above="@+id/buttonsLayout"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
-        android:layout_above="@+id/buttonsLayout">
+        android:layout_marginTop="8dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="4dp"
             android:orientation="vertical">
 
-            <CheckBox
-                android:id="@+id/appCheckBox"
+            <TextView
+                android:id="@+id/textView5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="@string/app_box" />
+                android:layout_marginTop="8dp"
+                android:text="@string/aboutlibrary_main_params" />
 
-            <CheckBox
-                android:id="@+id/authorCheckBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="@string/author_box" />
-
-            <CheckBox
-                android:id="@+id/otherProjectsCheckBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="@string/other_projects_box" />
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="#afadad" />
 
             <TextView
                 android:id="@+id/textView3"
@@ -98,10 +91,61 @@
                 android:layout_height="wrap_content" />
 
             <CheckBox
-                android:id="@+id/errorViewCheckBox"
-                android:text="@string/show_error_view"
+                android:id="@+id/flatButtonsCheckBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="@string/aboutlibrary_flat_buttons" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/aboutlibrary_sections" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="#afadad" />
+
+            <CheckBox
+                android:id="@+id/appCheckBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="@string/app_box" />
+
+            <CheckBox
+                android:id="@+id/authorCheckBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="@string/author_box" />
+
+            <CheckBox
+                android:id="@+id/otherProjectsCheckBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="@string/other_projects_box" />
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/aboutlibrary_others" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="#afadad" />
+
+            <CheckBox
+                android:id="@+id/errorViewCheckBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/show_error_view"
                 tools:layout_editor_absoluteX="120dp"
                 tools:layout_editor_absoluteY="254dp" />
         </LinearLayout>
@@ -111,9 +155,11 @@
         android:id="@+id/buttonsLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true">
 
         <Button
             android:id="@+id/loadButton"
@@ -125,7 +171,9 @@
             android:text="@string/show"
             project:layout_constraintBottom_toBottomOf="parent"
             project:layout_constraintEnd_toStartOf="@+id/guideline"
-            project:layout_constraintStart_toStartOf="parent" />
+            project:layout_constraintStart_toStartOf="parent"
+            android:layout_marginRight="4dp"
+            android:layout_marginLeft="8dp" />
 
         <android.support.constraint.Guideline
             android:id="@+id/guideline"
@@ -144,7 +192,9 @@
             android:text="@string/reset"
             project:layout_constraintBottom_toBottomOf="parent"
             project:layout_constraintEnd_toEndOf="parent"
-            project:layout_constraintStart_toStartOf="@+id/guideline" />
+            project:layout_constraintStart_toStartOf="@+id/guideline"
+            android:layout_marginRight="8dp"
+            android:layout_marginLeft="4dp" />
 
     </android.support.constraint.ConstraintLayout>
 

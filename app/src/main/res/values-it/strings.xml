@@ -11,6 +11,12 @@
 
     <string name="language">Lingua</string>
 
+    <string name="aboutlibrary_main_params">Parametri principali</string>
+    <string name="aboutlibrary_sections">Sezioni</string>
+    <string name="aboutlibrary_others">Altro</string>
+
+    <string name="aboutlibrary_flat_buttons">Pulsanti flat</string>
+
     <string name="app_of_about">App</string>
 
     <string name="show_error_view">Visualizza la vista di errore</string>

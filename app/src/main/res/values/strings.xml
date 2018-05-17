@@ -10,6 +10,12 @@
 
     <string name="language">Language</string>
 
+    <string name="aboutlibrary_main_params">Main parameters</string>
+    <string name="aboutlibrary_sections">Sections</string>
+    <string name="aboutlibrary_others">Others</string>
+
+    <string name="aboutlibrary_flat_buttons">Flat buttons</string>
+
     <string name="app_of_about">App</string>
 
     <string name="show_error_view">Show error view</string>
