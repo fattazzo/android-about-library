@@ -195,11 +195,13 @@ class AboutView(private val mContext: Context, private val builder: AboutViewBui
                 projects = projects.filter { it.id != builder.idApp }
             }
 
-            val otherProjectsBoxView = OtherProjectsView(mContext, projects, builder.lang, builder.additionalProjectButtons.toMap()).create()
-            if (boxLayout2 != null) {
-                boxLayout2!!.addView(otherProjectsBoxView)
-            } else
-                boxLayout.addView(otherProjectsBoxView)
+            if (projects.isNotEmpty() || builder.additionalProjectButtons.isNotEmpty()) {
+                val otherProjectsBoxView = OtherProjectsView(mContext, projects, builder.lang, builder.additionalProjectButtons.toMap()).create()
+                if (boxLayout2 != null) {
+                    boxLayout2!!.addView(otherProjectsBoxView)
+                } else
+                    boxLayout.addView(otherProjectsBoxView)
+            }
         }
     }
 

@@ -94,7 +94,7 @@ open class MainActivity : AppCompatActivity() {
             AboutViewBuilder().withInfo(createInfoSample())
         }
 
-        aboutViewBuilder = aboutViewBuilder!!
+        aboutViewBuilder = aboutViewBuilder
                 // ------------- Main params -------------------
                 .withAppId(projectsIdArrayRes[appSpinner.selectedItemPosition])
                 .withLang(langCodeArrayRes[langSpinner.selectedItemPosition])
@@ -104,7 +104,7 @@ open class MainActivity : AppCompatActivity() {
                 .withAuthorBox(authorCheckBox.isChecked)
                 // ------------- Other projects section --------
                 .withOtherProjectsBox(otherProjectsCheckBox.isChecked)
-                .withExcludeThisAppFromProjects(false)
+                .withExcludeThisAppFromProjects(true)
 
         val intent = Intent(this, AboutActivity::class.java)
                 .apply { putExtra(AboutActivity.EXTRA_BUILDER, aboutViewBuilder) }
