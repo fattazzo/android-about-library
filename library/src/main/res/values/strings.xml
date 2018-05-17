@@ -1,6 +1,4 @@
 <resources>
-    <string name="aboutlibrary_app_name" translatable="false">About Library</string>
-
     <string name="aboutlibrary_play_store">Play store</string>
     <string name="aboutlibrary_apple_store">Apple store</string>
     <string name="aboutlibrary_website">Website</string>

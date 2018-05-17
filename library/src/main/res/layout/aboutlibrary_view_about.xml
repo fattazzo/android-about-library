@@ -69,7 +69,8 @@
                     android:layout_alignParentBottom="true"
                     android:layout_alignParentEnd="true"
                     android:layout_margin="4dp"
-                    android:scaleType="fitXY"/>
+                    android:scaleType="fitXY"
+                    android:layout_alignParentRight="true" />
 
                 <View
                     android:layout_width="match_parent"

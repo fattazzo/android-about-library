@@ -39,7 +39,7 @@ import java.net.URL
  *         <p/>
  *         date: 10/05/18
  */
-class InfoDownloaderTask(var closure: Closure<Info?>) : AsyncTask<URL?, Void, Info?>() {
+class InfoDownloaderTask(private var closure: Closure<Info?>) : AsyncTask<URL?, Void, Info?>() {
 
     override fun doInBackground(vararg params: URL?): Info? {
 
@@ -67,7 +67,7 @@ class InfoDownloaderTask(var closure: Closure<Info?>) : AsyncTask<URL?, Void, In
     /**
      * Get stream from input url
      *
-     * @param stringUrl url
+     * @param url url
      * @return stream loaded
      */
     private fun getInputStreamFromURL(url: URL?): InputStream? {

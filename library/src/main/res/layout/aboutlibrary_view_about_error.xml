@@ -47,7 +47,9 @@
         android:text="@string/aboutlibrary_oops"
         android:textAllCaps="false"
         android:textAppearance="@style/AndroidLibraryTextAppearance.Big"
-        android:textStyle="bold|italic" />
+        android:textStyle="bold|italic"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true" />
 
     <ImageView
         android:id="@+id/aboutlibrary_imageView"
@@ -60,7 +62,9 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:scaleType="fitCenter"
-        app:srcCompat="@drawable/aboutlibrary_error" />
+        app:srcCompat="@drawable/aboutlibrary_error"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true" />
 
     <TextView
         android:id="@+id/aboutlibrary_textView3"
@@ -75,6 +79,8 @@
         android:gravity="center_horizontal"
         android:text="@string/aboutlibrary_oops_text"
         android:textAppearance="@style/AndroidLibraryTextAppearance.Medium"
-        android:textStyle="italic" />
+        android:textStyle="italic"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true" />
 
 </RelativeLayout>

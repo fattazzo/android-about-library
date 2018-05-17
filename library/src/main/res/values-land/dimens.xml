@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="aboutlibrary_font_size_small">12sp</dimen>
     <dimen name="aboutlibrary_font_size_medium">16sp</dimen>
     <dimen name="aboutlibrary_font_size_large">20sp</dimen>
     <dimen name="aboutlibrary_font_size_big">40sp</dimen>
@@ -8,5 +7,4 @@
     <dimen name="aboutlibrary_app_icon_size">48dp</dimen>
 
     <dimen name="aboutlibrary_about_image_height">180dp</dimen>
-    <dimen name="aboutlibrary_about_image_overlap">100dp</dimen>
 </resources>

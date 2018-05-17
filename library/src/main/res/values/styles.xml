@@ -2,18 +2,12 @@
 
     <style name="AndroidLibraryAppThemeAndroidLibrary" parent="Theme.AppCompat.Light.NoActionBar" />
 
-    <style name="AndroidLibraryTextAppearance" parent="@android:style/TextAppearance" />
-
     <style name="AndroidLibraryTextAppearance.Large" parent="@android:style/TextAppearance.Large">
         <item name="android:textSize">@dimen/aboutlibrary_font_size_large</item>
     </style>
 
     <style name="AndroidLibraryTextAppearance.Medium" parent="@android:style/TextAppearance.Medium">
         <item name="android:textSize">@dimen/aboutlibrary_font_size_medium</item>
-    </style>
-
-    <style name="AndroidLibraryTextAppearance.Small" parent="@android:style/TextAppearance.Small">
-        <item name="android:textSize">@dimen/aboutlibrary_font_size_small</item>
     </style>
 
     <style name="AndroidLibraryTextAppearance.Big" parent="@android:style/TextAppearance.Large">
@@ -23,12 +17,6 @@
     <style name="AndroidLibraryCollapsingTextAppearance" parent="Base.TextAppearance.AppCompat.Widget.ActionBar.Title">
         <item name="android:textSize">@dimen/aboutlibrary_font_size_large</item>
         <item name="android:textColor">@color/aboutlibrary_white</item>
-        <item name="android:textStyle">bold</item>
-    </style>
-
-    <style name="AndroidLibraryCollapsingTextAppearance.Inverse">
-        <item name="android:textSize">@dimen/aboutlibrary_font_size_large</item>
-        <item name="android:textColor">@color/aboutlibrary_black</item>
         <item name="android:textStyle">bold</item>
     </style>
 

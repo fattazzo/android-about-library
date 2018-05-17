@@ -1,7 +1,4 @@
 <resources>
-
-    <color name="aboutlibrary_black_overlay">#66000000</color>
-
     <color name="aboutlibrary_background">#f2f0f0</color>
 
     <color name="aboutlibrary_email">#75b448</color>

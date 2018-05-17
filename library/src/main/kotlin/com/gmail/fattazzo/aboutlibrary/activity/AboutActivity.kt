@@ -34,7 +34,7 @@ import com.gmail.fattazzo.aboutlibrary.builder.AboutViewBuilder
 
 class AboutActivity : AppCompatActivity() {
 
-    var aboutViewBuilder: AboutViewBuilder? = null
+    private var aboutViewBuilder: AboutViewBuilder? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,12 +42,12 @@ class AboutActivity : AppCompatActivity() {
         if (savedInstanceState?.getSerializable(builderSave) != null) {
             aboutViewBuilder = savedInstanceState.getSerializable(builderSave) as AboutViewBuilder
         } else {
-            if(intent.getSerializableExtra(EXTRA_BUILDER) != null) {
+            if (intent.getSerializableExtra(EXTRA_BUILDER) != null) {
                 aboutViewBuilder = intent.getSerializableExtra(EXTRA_BUILDER) as AboutViewBuilder?
             }
         }
 
-        if(aboutViewBuilder != null) {
+        if (aboutViewBuilder != null) {
             setContentView(aboutViewBuilder!!.build(this))
         } else {
             setContentView(R.layout.aboutlibrary_view_about_error)
