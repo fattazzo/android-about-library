@@ -1,3 +1,7 @@
+![](https://img.shields.io/badge/android-API%2014%2B-red.svg)
+[![GitHub release](https://img.shields.io/github/release/fattazzo/android-about-library.svg)](https://github.com/fattazzo/android-about-library/releases)
+[![GitHub issues](https://img.shields.io/github/issues/fattazzo/android-about-library.svg)](https://github.com/fattazzo/android-about-library/issues)
+
 # android-about-library
 
 The AboutLibraries library allows you to easily generate beautiful about view fully customizable with less effort and code.
