@@ -65,6 +65,7 @@ class AboutActivity : Activity() {
                         .withInfoUrl(INFO_URL)
                         .withAppId(this@AboutActivity.applicationContext.packageName)
                         .withLang("it")
+                        .withFlatStyleButtons(true) // default false
                         .withAppBox(true) // default true
                         .withAuthorBox(true) // default true
                         .withOtherProjectsBox(true) // default true
