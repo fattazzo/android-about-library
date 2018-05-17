@@ -1,6 +1,7 @@
 ![](https://img.shields.io/badge/android-API%2014%2B-red.svg)
 [![GitHub release](https://img.shields.io/github/release/fattazzo/android-about-library.svg)](https://github.com/fattazzo/android-about-library/releases)
 [![GitHub issues](https://img.shields.io/github/issues/fattazzo/android-about-library.svg)](https://github.com/fattazzo/android-about-library/issues)
+![GitHub last commit](https://img.shields.io/github/last-commit/google/skia.svg)
 
 # android-about-library
 
