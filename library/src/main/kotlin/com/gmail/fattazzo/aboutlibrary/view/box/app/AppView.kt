@@ -38,6 +38,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.gmail.fattazzo.aboutlibrary.R
 import com.gmail.fattazzo.aboutlibrary.builder.AboutButtonBuilder
+import com.gmail.fattazzo.aboutlibrary.builder.Action
 import com.gmail.fattazzo.aboutlibrary.domain.Project
 import com.squareup.picasso.Picasso
 
@@ -143,7 +144,11 @@ class AppView(private val mContext: Context, private val project: Project, priva
             AboutButtonBuilder()
                     .withText(R.string.aboutlibrary_rate_it)
                     .withDrawable(R.drawable.aboutlibrary_star)
-                    .withAction(View.OnClickListener { mContext.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(rateItUrl))) })
+                    .withAction(object : Action {
+                        override fun run(context: Context) {
+                            context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(rateItUrl)))
+                        }
+                    })
                     .build(mContext)
         }
     }

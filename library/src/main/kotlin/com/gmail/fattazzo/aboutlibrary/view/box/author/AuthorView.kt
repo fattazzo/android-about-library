@@ -45,6 +45,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import com.gmail.fattazzo.aboutlibrary.R
 import com.gmail.fattazzo.aboutlibrary.builder.AboutFabBuilder
+import com.gmail.fattazzo.aboutlibrary.builder.Action
 import com.gmail.fattazzo.aboutlibrary.domain.Author
 import com.gmail.fattazzo.aboutlibrary.utils.GravatarRetriver
 import com.squareup.picasso.Picasso
@@ -75,11 +76,13 @@ class AuthorView(private val mContext: Context, private val author: Author?, pri
 
         author?.email?.let {
             val fab = AboutFabBuilder().withDrawable(R.drawable.aboutlibrary_email).withColor(R.color.aboutlibrary_email)
-                    .withAction(View.OnClickListener {
-                        val intent = Intent(Intent.ACTION_SEND)
-                        intent.putExtra(Intent.EXTRA_EMAIL, arrayOf(this.author.email))
-                        intent.type = "message/rfc822"
-                        ContextCompat.startActivity(mContext, Intent.createChooser(intent, "Choose Mail Project"), null)
+                    .withAction(object : Action {
+                        override fun run(context: Context) {
+                            val intent = Intent(Intent.ACTION_SEND)
+                            intent.putExtra(Intent.EXTRA_EMAIL, arrayOf(author.email))
+                            intent.type = "message/rfc822"
+                            ContextCompat.startActivity(context, Intent.createChooser(intent, "Choose Mail Project"), null)
+                        }
                     })
                     .build(mContext)
             fabsLayout.addView(fab)

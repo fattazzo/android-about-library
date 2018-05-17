@@ -53,11 +53,11 @@ class AboutButton(private val mContext: Context, private val builder: AboutButto
         }
 
         val drawableBG = if (builder.backgroundDark) R.drawable.aboutlibrary_button_background else R.drawable.aboutlibrary_button_background_white
-        button.background = mContext.getDrawable(drawableBG)
+        button.setBackgroundResource(drawableBG)
 
         when {
             builder.url != null -> button.setOnClickListener { Utils.openLink(mContext, builder.url) }
-            builder.action != null -> button.setOnClickListener(builder.action)
+            builder.action != null -> button.setOnClickListener({ builder.action!!.run(mContext) })
         }
 
         return button

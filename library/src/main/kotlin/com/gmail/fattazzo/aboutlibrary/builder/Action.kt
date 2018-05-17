@@ -1,6 +1,6 @@
 /*
  * Project: android-about-library
- * File: AboutFabBuilder.kt
+ * File: Action.kt
  *
  * Created by fattazzo
  * Copyright © 2018 Gianluca Fattarsi. All rights reserved.
@@ -28,49 +28,13 @@
 package com.gmail.fattazzo.aboutlibrary.builder
 
 import android.content.Context
-import android.view.View
-import com.gmail.fattazzo.aboutlibrary.R
-import com.gmail.fattazzo.aboutlibrary.view.buttons.AboutFab
-import java.io.Serializable
 
 /**
  * @author fattazzo
  *         <p/>
- *         date: 16/05/18
+ *         date: 17/05/18
  */
-class AboutFabBuilder : Serializable {
+interface Action {
 
-    var drawableResId: Int? = null
-        private set
-
-    var action: Action? = null
-        private set
-
-    var url: String? = null
-        private set
-
-    var color: Int = R.color.aboutlibrary_light_gray
-        private set
-
-    fun withColor(color: Int): AboutFabBuilder {
-        this.color = color
-        return this
-    }
-
-    fun withUrl(url: String): AboutFabBuilder {
-        this.url = url
-        return this
-    }
-
-    fun withAction(action: Action): AboutFabBuilder {
-        this.action = action
-        return this
-    }
-
-    fun withDrawable(drawableResId: Int): AboutFabBuilder {
-        this.drawableResId = drawableResId
-        return this
-    }
-
-    fun build(context: Context): View = AboutFab(context, this).create()
+    fun run(context: Context)
 }

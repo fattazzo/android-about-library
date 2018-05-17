@@ -55,7 +55,7 @@ class AboutButtonBuilder : Serializable {
     var drawableResId: Int? = null
         private set
 
-    var action: View.OnClickListener? = null
+    var action: Action? = null
         private set
 
     var url: String? = null
@@ -66,7 +66,7 @@ class AboutButtonBuilder : Serializable {
         return this
     }
 
-    fun withAction(action: View.OnClickListener): AboutButtonBuilder {
+    fun withAction(action: Action): AboutButtonBuilder {
         this.action = action
         return this
     }

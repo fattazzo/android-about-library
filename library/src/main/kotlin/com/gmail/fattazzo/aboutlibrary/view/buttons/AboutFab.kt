@@ -57,7 +57,7 @@ class AboutFab(private val mContext: Context, private val builder: AboutFabBuild
 
         when {
             builder.url != null -> fab.setOnClickListener { Utils.openLink(mContext, builder.url) }
-            builder.action != null -> fab.setOnClickListener(builder.action)
+            builder.action != null -> fab.setOnClickListener({ builder.action!!.run(mContext) })
         }
 
         fab.size = FloatingActionButton.SIZE_MINI
