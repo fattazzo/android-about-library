@@ -29,6 +29,7 @@ package com.gmail.fattazzo.aboutlibrary.view.buttons
 
 import android.content.Context
 import android.support.v4.content.ContextCompat
+import android.view.Gravity
 import android.view.View
 import android.widget.Button
 import com.gmail.fattazzo.aboutlibrary.R
@@ -48,12 +49,22 @@ class AboutButton(private val mContext: Context, private val builder: AboutButto
         button.text = if (builder.textResId != null) mContext.getString(builder.textResId!!) else builder.text
         button.setTextColor(ContextCompat.getColor(mContext, builder.textColor))
 
+
         if (builder.drawableResId != null) {
             button.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(mContext, builder.drawableResId!!), null, null, null)
         }
 
-        val drawableBG = if (builder.backgroundDark) R.drawable.aboutlibrary_button_background else R.drawable.aboutlibrary_button_background_white
-        button.setBackgroundResource(drawableBG)
+        when {
+            builder.flatStyle -> {
+                button.gravity = Gravity.START or Gravity.CENTER_VERTICAL
+                button.setBackgroundResource(android.R.color.transparent)
+                button.compoundDrawablePadding = 8
+            }
+            else -> {
+                val drawableBG = if (builder.backgroundDark) R.drawable.aboutlibrary_button_background else R.drawable.aboutlibrary_button_background_white
+                button.setBackgroundResource(drawableBG)
+            }
+        }
 
         when {
             builder.url != null -> button.setOnClickListener { Utils.openLink(mContext, builder.url) }

@@ -40,7 +40,7 @@ import com.gmail.fattazzo.aboutlibrary.domain.Project
  *         <p/>
  *         date: 11/05/18
  */
-class OtherProjectsView(private val mContext: Context, private val projects: List<Project>, private val lang: String, private val additionalProjectButtons: Map<String, List<AboutButtonBuilder>>) {
+class OtherProjectsView(private val mContext: Context, private val projects: List<Project>, private val lang: String, private val flatStyle : Boolean, private val additionalProjectButtons: Map<String, List<AboutButtonBuilder>>) {
 
     private var mInflater: LayoutInflater = LayoutInflater.from(mContext)
     private var mRootView: View = mInflater.inflate(R.layout.aboutlibrary_view_other_projects, null)
@@ -51,7 +51,7 @@ class OtherProjectsView(private val mContext: Context, private val projects: Lis
         projects.forEach {
             val additionalButtons = additionalProjectButtons[it.id].orEmpty()
 
-            val projectView = ProjectView(mContext, it, lang, additionalButtons).create()
+            val projectView = ProjectView(mContext, it, lang, flatStyle, additionalButtons).create()
             otherProjectsLayout.addView(projectView)
         }
 

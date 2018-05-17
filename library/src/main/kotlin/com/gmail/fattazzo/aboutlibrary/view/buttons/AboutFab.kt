@@ -34,6 +34,7 @@ import android.support.v4.content.ContextCompat
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import com.gmail.fattazzo.aboutlibrary.R
 import com.gmail.fattazzo.aboutlibrary.builder.AboutFabBuilder
 import com.gmail.fattazzo.aboutlibrary.utils.Utils
 import java.io.Serializable
@@ -62,8 +63,10 @@ class AboutFab(private val mContext: Context, private val builder: AboutFabBuild
 
         fab.size = FloatingActionButton.SIZE_MINI
 
+        val margin = mContext.resources.getInteger(R.integer.aboutlibrary_fab_margin)
+
         val params = LinearLayout.LayoutParams(ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT))
-        params.setMargins(8, 0, 0, 8)
+        params.setMargins(margin, 0, 0, margin)
         fab.layoutParams = params
         return fab
     }

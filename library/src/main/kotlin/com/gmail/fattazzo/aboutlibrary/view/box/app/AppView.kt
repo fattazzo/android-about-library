@@ -48,7 +48,7 @@ import com.squareup.picasso.Picasso
  *         <p/>
  *         date: 10/05/18
  */
-class AppView(private val mContext: Context, private val project: Project, private val lang: String, private val additionalAppButtons: List<AboutButtonBuilder>) {
+class AppView(private val mContext: Context, private val project: Project, private val lang: String, private val flatStyle: Boolean, private val additionalAppButtons: List<AboutButtonBuilder>) {
 
     private var mInflater: LayoutInflater = LayoutInflater.from(mContext)
     private var mRootView: View = mInflater.inflate(R.layout.aboutlibrary_view_app, null)
@@ -75,35 +75,19 @@ class AppView(private val mContext: Context, private val project: Project, priva
 
         val buttons = mutableListOf<View>()
         project.playStoreUrl?.let {
-            buttons.add(AboutButtonBuilder()
-                    .withText(R.string.aboutlibrary_play_store)
-                    .withDrawable(R.drawable.aboutlibrary_googleplay)
-                    .withUrl(it)
-                    .build(mContext))
+            buttons.add(buildUrlButton(R.string.aboutlibrary_play_store, R.drawable.aboutlibrary_googleplay, it, flatStyle))
         }
 
         project.githubUrl?.let {
-            buttons.add(AboutButtonBuilder()
-                    .withText(R.string.aboutlibrary_github_project)
-                    .withDrawable(R.drawable.aboutlibrary_github)
-                    .withUrl(it)
-                    .build(mContext))
+            buttons.add(buildUrlButton(R.string.aboutlibrary_github_project, R.drawable.aboutlibrary_github, it, flatStyle))
         }
 
         project.websiteUrl?.let {
-            buttons.add(AboutButtonBuilder()
-                    .withText(R.string.aboutlibrary_website)
-                    .withDrawable(R.drawable.aboutlibrary_website)
-                    .withUrl(it)
-                    .build(mContext))
+            buttons.add(buildUrlButton(R.string.aboutlibrary_website, R.drawable.aboutlibrary_website, it, flatStyle))
         }
 
         project.wikiUrl?.let {
-            buttons.add(AboutButtonBuilder()
-                    .withText(R.string.aboutlibrary_wiki)
-                    .withDrawable(R.drawable.aboutlibrary_wiki)
-                    .withUrl(it)
-                    .build(mContext))
+            buttons.add(buildUrlButton(R.string.aboutlibrary_wiki, R.drawable.aboutlibrary_wiki, it, flatStyle))
         }
 
         val rateItButton = buildRateItButton()
@@ -135,6 +119,15 @@ class AppView(private val mContext: Context, private val project: Project, priva
             i++
             column++
         }
+    }
+
+    private fun buildUrlButton(textResId: Int, drawableResId: Int, url: String, flat: Boolean): View {
+        return AboutButtonBuilder()
+                .withText(textResId)
+                .withDrawable(drawableResId)
+                .withUrl(url)
+                .withFlatStyle(flat)
+                .build(mContext)
     }
 
     private fun buildRateItButton(): View? {

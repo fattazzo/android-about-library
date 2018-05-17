@@ -53,6 +53,8 @@ class AboutViewBuilder : Serializable {
         private set
     var idApp: String = ""
         private set
+    var flatStyleButtons = false
+        private set
 
     // -------------------- About this app section -------
     var appBox = true
@@ -73,6 +75,11 @@ class AboutViewBuilder : Serializable {
         private set
     var excludeThisAppFromProjects = false
         private set
+
+    fun withFlatStyleButtons(flatStyle: Boolean = false): AboutViewBuilder {
+        this.flatStyleButtons = flatStyle
+        return this
+    }
 
     fun withAdditionalAuthorButtons(buttons: List<AboutFabBuilder>): AboutViewBuilder {
         this.additionalAuthorButtons = buttons

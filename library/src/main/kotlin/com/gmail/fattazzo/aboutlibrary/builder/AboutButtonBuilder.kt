@@ -52,6 +52,9 @@ class AboutButtonBuilder : Serializable {
     var backgroundDark = false
         private set
 
+    var flatStyle = false
+        private set
+
     var drawableResId: Int? = null
         private set
 
@@ -60,6 +63,11 @@ class AboutButtonBuilder : Serializable {
 
     var url: String? = null
         private set
+
+    fun withFlatStyle(flat: Boolean = false): AboutButtonBuilder {
+        this.flatStyle = flat
+        return this
+    }
 
     fun withUrl(url: String): AboutButtonBuilder {
         this.url = url

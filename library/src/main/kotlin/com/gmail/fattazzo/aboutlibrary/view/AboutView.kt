@@ -29,9 +29,11 @@ package com.gmail.fattazzo.aboutlibrary.view
 
 import android.content.Context
 import android.graphics.drawable.ColorDrawable
+import android.os.Build
 import android.os.Handler
 import android.support.design.widget.CollapsingToolbarLayout
 import android.support.v4.content.ContextCompat
+import android.support.v7.app.AppCompatDelegate
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -68,6 +70,12 @@ class AboutView(private val mContext: Context, private val builder: AboutViewBui
     private var boxLayout2: LinearLayout? = null
 
     private lateinit var aboutBgImageView: ImageView
+
+    init {
+        if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
+        }
+    }
 
     /**
      * Assemble and build the view based on the configured parameters.
@@ -122,7 +130,7 @@ class AboutView(private val mContext: Context, private val builder: AboutViewBui
             boxLayout = mRootView.findViewById(R.id.aboutlibrary_boxLayout)
             boxLayout2 = mRootView.findViewById(R.id.aboutlibrary_boxLayout2)
 
-            aboutBgImageView = mRootView.findViewById<ImageView>(R.id.aboutlibrary_aboutBgImageView)
+            aboutBgImageView = mRootView.findViewById(R.id.aboutlibrary_aboutBgImageView)
 
             return when {
                 builder.info != null -> create(builder.info!!)
@@ -175,7 +183,7 @@ class AboutView(private val mContext: Context, private val builder: AboutViewBui
     private fun buildAppBox() {
         val app = builder.info?.getProjectById(builder.idApp)
         if (builder.appBox && app != null) {
-            val appBoxView = AppView(mContext, app, builder.lang, builder.additionalAppButtons).create()
+            val appBoxView = AppView(mContext, app, builder.lang, builder.flatStyleButtons, builder.additionalAppButtons).create()
             boxLayout.addView(appBoxView)
         }
     }
@@ -196,7 +204,10 @@ class AboutView(private val mContext: Context, private val builder: AboutViewBui
             }
 
             if (projects.isNotEmpty() || builder.additionalProjectButtons.isNotEmpty()) {
-                val otherProjectsBoxView = OtherProjectsView(mContext, projects, builder.lang, builder.additionalProjectButtons.toMap()).create()
+                val otherProjectsBoxView = OtherProjectsView(mContext, projects,
+                        builder.lang,
+                        builder.flatStyleButtons,
+                        builder.additionalProjectButtons.toMap()).create()
                 if (boxLayout2 != null) {
                     boxLayout2!!.addView(otherProjectsBoxView)
                 } else

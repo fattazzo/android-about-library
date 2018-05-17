@@ -43,7 +43,7 @@ import com.squareup.picasso.Picasso
  *         <p/>
  *         date: 11/05/18
  */
-class ProjectView(private val mContext: Context, private val project: Project, private val lang: String, private val additionalButtons: List<AboutButtonBuilder>) {
+class ProjectView(private val mContext: Context, private val project: Project, private val lang: String, private val flatStyle: Boolean, private val additionalButtons: List<AboutButtonBuilder>) {
 
     private var mInflater: LayoutInflater = LayoutInflater.from(mContext)
     private var mRootView: View = mInflater.inflate(R.layout.aboutlibrary_view_project, null)
@@ -116,6 +116,7 @@ class ProjectView(private val mContext: Context, private val project: Project, p
                 .withDrawable(drawableResId)
                 .withBackgroundDark()
                 .withUrl(urlToOpen)
+                .withFlatStyle(flatStyle)
                 .build(mContext)
     }
 }
