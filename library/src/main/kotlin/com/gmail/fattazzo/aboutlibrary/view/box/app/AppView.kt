@@ -137,6 +137,7 @@ class AppView(private val mContext: Context, private val project: Project, priva
             AboutButtonBuilder()
                     .withText(R.string.aboutlibrary_rate_it)
                     .withDrawable(R.drawable.aboutlibrary_star)
+                    .withFlatStyle(flatStyle)
                     .withAction(object : Action {
                         override fun run(context: Context) {
                             context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(rateItUrl)))
