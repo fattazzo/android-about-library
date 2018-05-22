@@ -48,7 +48,7 @@ repositories {
 add the following dependency to your `build.gradle`
 
 ```javascript
-implementation "com.github.fattazzo:android-about-library:0.5.1"
+implementation "com.github.fattazzo:android-about-library:0.5.2"
 
 //required support lib modules
 implementation "com.android.support:appcompat-v7:${versions.supportLib}"
