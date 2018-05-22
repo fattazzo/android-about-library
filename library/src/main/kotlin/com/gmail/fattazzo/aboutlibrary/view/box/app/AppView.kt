@@ -74,9 +74,9 @@ class AppView(private val mContext: Context, private val project: Project, priva
         val buttonLayout: GridLayout = mRootView.findViewById(R.id.buttonLayout)
 
         val buttons = mutableListOf<View>()
-        project.playStoreUrl?.let {
-            buttons.add(buildUrlButton(R.string.aboutlibrary_play_store, R.drawable.aboutlibrary_googleplay, it, flatStyle))
-        }
+
+        val rateItButton = buildRateItButton()
+        rateItButton?.let { buttons.add(it) }
 
         project.githubUrl?.let {
             buttons.add(buildUrlButton(R.string.aboutlibrary_github_project, R.drawable.aboutlibrary_github, it, flatStyle))
@@ -89,9 +89,6 @@ class AppView(private val mContext: Context, private val project: Project, priva
         project.wikiUrl?.let {
             buttons.add(buildUrlButton(R.string.aboutlibrary_wiki, R.drawable.aboutlibrary_wiki, it, flatStyle))
         }
-
-        val rateItButton = buildRateItButton()
-        rateItButton?.let { buttons.add(it) }
 
         additionalAppButtons.forEach { buttons.add(it.build(mContext)) }
 
