@@ -6,6 +6,9 @@
     <string name="aboutlibrary_wiki">Wiki</string>
     <string name="aboutlibrary_author">Author</string>
     <string name="aboutlibrary_other_projects">Other projects</string>
+    <string name="aboutlibrary_other_app_projects">Other apps projects</string>
+    <string name="aboutlibrary_other_web_projects">Other web projects</string>
+    <string name="aboutlibrary_other_library_projects">Other libraries projects</string>
 
     <string name="aboutlibrary_rate_it">Rate It!</string>
 

@@ -31,8 +31,10 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
+import android.widget.TextView
 import com.gmail.fattazzo.aboutlibrary.R
 import com.gmail.fattazzo.aboutlibrary.builder.AboutButtonBuilder
+import com.gmail.fattazzo.aboutlibrary.domain.Group
 import com.gmail.fattazzo.aboutlibrary.domain.Project
 
 /**
@@ -40,12 +42,14 @@ import com.gmail.fattazzo.aboutlibrary.domain.Project
  *         <p/>
  *         date: 11/05/18
  */
-class OtherProjectsView(private val mContext: Context, private val projects: List<Project>, private val lang: String, private val flatStyle : Boolean, private val additionalProjectButtons: Map<String, List<AboutButtonBuilder>>) {
+class OtherProjectsView(private val mContext: Context, private val group: Group, private val projects: List<Project>, private val lang: String, private val flatStyle: Boolean, private val additionalProjectButtons: Map<String, List<AboutButtonBuilder>>) {
 
     private var mInflater: LayoutInflater = LayoutInflater.from(mContext)
     private var mRootView: View = mInflater.inflate(R.layout.aboutlibrary_view_other_projects, null)
 
     fun create(): View {
+        mRootView.findViewById<TextView>(R.id.titleTV).text = mContext.getString(group.resourceId)
+
         val otherProjectsLayout = mRootView.findViewById<LinearLayout>(R.id.aboutlibrary_otherProjectsLayout)
 
         projects.forEach {

@@ -34,10 +34,7 @@ import android.widget.CheckBox
 import android.widget.Spinner
 import com.gmail.fattazzo.aboutlibrary.activity.AboutActivity
 import com.gmail.fattazzo.aboutlibrary.builder.AboutViewBuilder
-import com.gmail.fattazzo.aboutlibrary.domain.Author
-import com.gmail.fattazzo.aboutlibrary.domain.I18n
-import com.gmail.fattazzo.aboutlibrary.domain.Info
-import com.gmail.fattazzo.aboutlibrary.domain.Project
+import com.gmail.fattazzo.aboutlibrary.domain.*
 import org.androidannotations.annotations.AfterViews
 import org.androidannotations.annotations.Click
 import org.androidannotations.annotations.EActivity
@@ -142,6 +139,7 @@ open class MainActivity : AppCompatActivity() {
 
         val meteoProject = Project().apply {
             id = "com.gmail.fattazzo.meteo"
+            group = Group.APP
             icon = "https://lh5.ggpht.com/a9f5u65dd-GgFGbLaDO5XauCNcjtJqOkSDqR_xDJ9vbT4MqutzLz0dfsWBtGBH2Ij6sq=h150"
             playStoreUrl = "https://play.google.com/store/apps/details?id=com.gmail.fattazzo.meteo"
             githubUrl = "https://github.com/fattazzo/meteo"
@@ -159,6 +157,7 @@ open class MainActivity : AppCompatActivity() {
 
         val totalGPProject = Project().apply {
             id = "com.gmail.fattazzo.formula1world"
+            group = Group.APP
             icon = "https://raw.githubusercontent.com/wiki/fattazzo/total-gp-world/images/logo.png"
             playStoreUrl = "https://play.google.com/store/apps/details?id=com.gmail.fattazzo.formula1world"
             githubUrl = "https://github.com/fattazzo/total-gp-world"
@@ -177,6 +176,7 @@ open class MainActivity : AppCompatActivity() {
 
         val aboutLibraryProject = Project().apply {
             id = "com.gmail.fattazzo.aboutlibrary"
+            group = Group.LIBRARY
             icon = "https://raw.githubusercontent.com/wiki/fattazzo/android-about-library/images/info.png"
             githubUrl = "https://github.com/fattazzo/android-about-library"
             wikiUrl = "https://github.com/fattazzo/android-about-library/wiki"

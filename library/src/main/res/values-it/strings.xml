@@ -7,6 +7,9 @@
     <string name="aboutlibrary_wiki">Guida</string>
     <string name="aboutlibrary_author">Autore</string>
     <string name="aboutlibrary_other_projects">Altri progetti</string>
+    <string name="aboutlibrary_other_app_projects">Altre app</string>
+    <string name="aboutlibrary_other_web_projects">Altri progetti web</string>
+    <string name="aboutlibrary_other_library_projects">Altre librerie</string>
 
     <string name="aboutlibrary_rate_it">Valuta!</string>
 

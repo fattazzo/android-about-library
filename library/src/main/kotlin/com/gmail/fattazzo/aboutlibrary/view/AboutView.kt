@@ -204,14 +204,20 @@ class AboutView(private val mContext: Context, private val builder: AboutViewBui
             }
 
             if (projects.isNotEmpty() || builder.additionalProjectButtons.isNotEmpty()) {
-                val otherProjectsBoxView = OtherProjectsView(mContext, projects,
-                        builder.lang,
-                        builder.flatStyleButtons,
-                        builder.additionalProjectButtons.toMap()).create()
-                if (boxLayout2 != null) {
-                    boxLayout2!!.addView(otherProjectsBoxView)
-                } else
-                    boxLayout.addView(otherProjectsBoxView)
+                val projectsMap = projects.groupBy({ it.group }, { it })
+
+                for (entry in projectsMap.entries) {
+                    run {
+                        val otherProjectsBoxView = OtherProjectsView(mContext, entry.key, entry.value,
+                                builder.lang,
+                                builder.flatStyleButtons,
+                                builder.additionalProjectButtons.toMap()).create()
+                        if (boxLayout2 != null) {
+                            boxLayout2!!.addView(otherProjectsBoxView)
+                        } else
+                            boxLayout.addView(otherProjectsBoxView)
+                    }
+                }
             }
         }
     }

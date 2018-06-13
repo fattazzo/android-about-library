@@ -1,6 +1,6 @@
 /*
  * Project: android-about-library
- * File: Project.kt
+ * File: Group.kt
  *
  * Created by fattazzo
  * Copyright © 2018 Gianluca Fattarsi. All rights reserved.
@@ -27,65 +27,18 @@
 
 package com.gmail.fattazzo.aboutlibrary.domain
 
-import com.google.gson.annotations.Expose
-import com.google.gson.annotations.SerializedName
-import java.io.Serializable
+import com.gmail.fattazzo.aboutlibrary.R
+
 
 /**
  * @author fattazzo
- *
- *
- * date: 09/05/18
+ *         <p/>
+ *         date: 12/06/18
  */
-class Project : Serializable {
+enum class Group(var resourceId: Int) {
 
-    @SerializedName("id")
-    @Expose
-    lateinit var id: String
-
-    @SerializedName("group")
-    @Expose
-    var group: Group = Group.OTHER
-
-    @SerializedName("icon")
-    @Expose
-    lateinit var icon: String
-
-    @SerializedName("image")
-    @Expose
-    var image: String? = null
-
-    @SerializedName("playStoreUrl")
-    @Expose
-    var playStoreUrl: String? = null
-
-    @SerializedName("githubUrl")
-    @Expose
-    var githubUrl: String? = null
-
-    @SerializedName("wikiUrl")
-    @Expose
-    var wikiUrl: String? = null
-
-    @SerializedName("appleStoreUrl")
-    @Expose
-    var appleStoreUrl: String? = null
-
-    @SerializedName("websiteUrl")
-    @Expose
-    var websiteUrl: String? = null
-
-    @SerializedName("i18n")
-    @Expose
-    var i18n: List<I18n> = listOf()
-
-    fun getI18n(lang: String = I18n.DEFAULT): I18n? {
-        i18n.forEach {
-            if (it.lang == lang) {
-                return it
-            }
-        }
-        return null
-    }
-
+    APP(R.string.aboutlibrary_other_app_projects),
+    WEB(R.string.aboutlibrary_other_web_projects),
+    LIBRARY(R.string.aboutlibrary_other_library_projects),
+    OTHER(R.string.aboutlibrary_other_projects);
 }
