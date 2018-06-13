@@ -61,25 +61,18 @@ Verify the latest release at https://github.com/fattazzo/android-about-library/r
 ## Simple usage
 
 ```java
-class AboutActivity : Activity() {
+val aboutViewBuilder = AboutViewBuilder()
+             .withInfoUrl(INFO_URL)
+             .withAppId(context.applicationContext.packageName)
+             .withLang("it")
+             .withFlatStyleButtons(true) // default false
+             .withAppBox(true) // default true
+             .withAuthorBox(true) // default true
+             .withOtherProjectsBox(true) // default true
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        val aboutViewBuilder = AboutViewBuilder()
-                        .withInfoUrl(INFO_URL)
-                        .withAppId(this@AboutActivity.applicationContext.packageName)
-                        .withLang("it")
-                        .withFlatStyleButtons(true) // default false
-                        .withAppBox(true) // default true
-                        .withAuthorBox(true) // default true
-                        .withOtherProjectsBox(true) // default true
-
-        val intent = Intent(this, com.gmail.fattazzo.aboutlibrary.activity.AboutActivity::class.java)
-                        .apply { putExtra(AboutActivity.EXTRA_BUILDER, aboutViewBuilder) }
-        startActivity(intent)
-    }
-}
+val intent = Intent(this, com.gmail.fattazzo.aboutlibrary.activity.AboutActivity::class.java)
+                .apply { putExtra(AboutActivity.EXTRA_BUILDER, aboutViewBuilder) }
+startActivity(intent)
 ```
 
 **Explanation**
